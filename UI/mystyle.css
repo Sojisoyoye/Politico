@@ -1,0 +1,105 @@
+html, body {
+    height: 100%
+  }
+  
+   html {
+      font-family:sans-serif;
+      color:#4a4a4a
+  } 
+  
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #828282;
+  }
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: rgb(192, 63, 54);
+    transition: all .15s ease-in-out;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  } 
+  
+  /* HOME PAGE */
+  /* homepage, admin page, userprofile page header */
+  .header {
+    background-color:grey;
+    margin-top:0;
+    margin-bottom:0;
+    padding:20px 20px 0;
+    display:flex;
+    justify-content:space-between;
+    overflow:hidden;
+    align-items:center;
+    flex-direction:column
+  }
+  .header__link {
+    color:#212121;
+    text-decoration:none
+  }
+  .header__logo {
+    margin-top:0;
+    margin-bottom:0;
+    font-family:'Pacifico', cursive;
+    font-size: 40px;
+    margin-left: 30px;
+  }
+  
+  img {
+    max-width:100%;
+    padding:0;
+    margin:0 0 1.45rem
+  }
+  .intro {
+    padding:0;
+    margin:0 0 1.45rem;
+    font-size:37px;
+    line-height:1.3em;
+    font-family: Open-Sans, sans-serif;
+  }
+  
+  p {
+    padding:0;
+    margin:0 0 1.45rem;
+    font-size:18px;
+    line-height:1.8em
+  }
+  
+  @media (min-width:790px)
+  {.header {
+      flex-direction:row;
+  }
+  }
+  
+  .menu {
+    height:100%;
+    list-style:none;
+    margin:0;
+    display:flex;
+    font-size:1.1em
+  }
+  .menu__item {
+    color:#9fa7a7;
+    text-decoration:none
+  }
+  .menu__item--selected {
+    text-decoration:underline;
+    color:#212121
+  }
+  .menu__button {
+    background:none;
+    border:none
+  } 
+  .menu>li {
+    margin:10px 0;
+    padding:0 20px
+  }
