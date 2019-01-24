@@ -732,6 +732,7 @@ input.app_signin_text_input_input {
   font-size: 14px;
 }
 
+
 @media (min-width: 1023px) {
   #site-main .main .political__meta fieldset input {
     width: auto;
@@ -750,6 +751,21 @@ input.app_signin_text_input_input {
   #site-main .main .political__meta fieldset {
     display: block;
     width: max-content;
+  }
+}
+
+#site-main .main .political__meta fieldset select {
+  padding: 3px;
+  margin-bottom: 5px;
+  width: 150px;
+  height: 30px;
+}
+
+@media (min-width: 2023px) {
+  #site-main .main .political__meta fieldset select {
+    padding: 10px;
+    font-size: 1.1rem;
+    width: auto;
   }
 }
 
@@ -783,4 +799,24 @@ input.app_signin_text_input_input {
   }
 }
 
+/* Pagination */
+#site-main .main .pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
 
+#site-main .main .pagination button {
+  width: 25%;
+  margin-right: 5px;
+  padding: 4px;
+  border-radius: 3px;
+  border: 1px solid #a9cfff;
+  background: white;
+  cursor: pointer;
+}
+
+#site-main .main .pagination button:hover {
+  background: #a9cfff;
+  color: #000;
+}
