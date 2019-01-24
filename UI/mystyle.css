@@ -30,7 +30,8 @@ html, body {
   } 
   
   /* HOME PAGE */
-  /* homepage, admin page, userprofile page header */
+  
+  /* Homepage header */
   .header {
     background-color:grey;
     margin-top:0;
@@ -103,3 +104,284 @@ html, body {
     margin:10px 0;
     padding:0 20px
   }
+
+
+  /* Registration Page */
+
+/* Signup */
+.app_signup_layout {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.app_signup_layout_content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Header - Signup*/
+
+h1 {
+width: 100%;
+height: 100%;
+font-family:'Pacifico', cursive;
+font-size: 40px;
+color: #212121;
+}
+.app_signup_header_logo {
+height: 32px;
+padding-top: 9px;
+}
+.app_signup_header_container {
+display: flex;
+justify-content: flex-start;
+margin-top: 25px;
+background: #fff;
+width: 100%;
+min-height: 62px;
+height: 62px;
+}
+.app_signup_header_outside {
+margin: 0 auto;
+}
+@media (orientation: portrait) and (max-width: 414px), (orientation: landscape) and (max-height: 414px) {
+    .app_signup_header_logo {
+        height: 32px;
+        padding-top: 15px;
+        float: none;
+    }
+    .app_signup_header_outside {
+        max-width: none;
+        min-width: 0;
+    }
+}
+
+/* Signup Container */
+
+.app_signup_signup_sheet_media_container {
+  font-family: Open Sans, Helvetica, Arial, EmojiFontFace, sans-serif;
+} 
+
+.app_signup_signup_sheet_content_container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 24px;
+  max-width: 510px;
+}
+
+
+@media (orientation: portrait) and (max-width: 414px), (orientation: landscape) and (max-height: 414px) {
+  .app_signup_signup_sheet_content_container {
+    width: auto;
+  }
+}
+
+.app_signup_signup_sheet_info_message {
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  min-height: 24px;
+  font-weight: 300;
+  text-align: center;
+  width: auto;
+  margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #444;
+}
+.app_signup_signup_sheet_error_message {
+  color: #f00;
+  margin-bottom: 15px;
+  display: block;
+}
+
+button {
+    width: 80%;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #212121;
+    background-color: #66bb6a;
+    height: 40px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #4caf50;
+}
+
+@media (orientation: portrait) and (max-width: 414px), (orientation: landscape) and (max-height: 414px) {
+  .app_signup_signup_sheet_info_message {
+    min-height: 48px;
+    font-weight: bold;
+    text-align: center;
+    width: 270px;
+    margin-top: 12px;
+  }
+}
+
+.SignupTabContainer {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.SignupTabContainer__tab--basic {
+  border-top-left-radius: 2px;
+  box-shadow: inset 8px 4px 0 #fff;
+}
+
+.SignupTabContainer__form {
+    flex-grow: 1;
+    box-shadow: 0 0 2px #fff, 0 0 5px #888;
+    padding: 16px 32px;
+    min-height: 501px;
+} 
+
+.app_signup_signup_sheet_signup_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Input */
+
+.app_signup_text_input_outer {
+  width: 100%;
+} 
+
+input.app_signup_text_input_input {
+    width: 94%;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 11px;
+    background-color: #FAFAFA;
+    border-radius: 2px;
+    margin-bottom: 7px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #DCDCDC;
+} 
+input.app_signup_text_input_input::placeholder {
+    color: #BBB;
+}
+input.app_signup_text_input_input--with-errors {
+    background: #FFEEEE;
+    border-color: #DF716E;
+}
+@media (orientation: portrait) and (max-width: 414px), (orientation: landscape) and (max-height: 414px) {
+    .app_signup_text_input_input {
+        margin-bottom: 12px;
+        margin-top: 6px;
+    }
+}
+.app_signup_text_input_label_text {
+    font-weight: 300;
+    text-align: left;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 18px 0 8px 0;
+}
+.app_signup_text_input_error_message {
+    text-align: left;
+    font-weight: normal;
+    color: #BF402E;
+    font-size: 12px;
+}
+
+.app_signup_input_select_input {
+    width: 100%;
+    height: 45px;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 11px;
+    background-color: #FAFAFA;
+    border-radius: 2px;
+    margin-bottom: 7px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #DCDCDC;
+}
+
+/* Consents - Sign up */
+
+.app_signup_consents {
+  width: 100%;
+}
+
+.app_signup_policy_message {
+  font-size: 14px;
+  text-align: left;
+}
+.app_signup_consents_heading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #505050;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.app_signup_consents_checkbox{
+  margin-left: -8px;
+}
+
+.consents__Checkbox {
+  cursor: pointer;
+  padding: 4px 0 4px 8px;
+}
+
+.consents__Checkbox:hover {
+  background-color: #E9F4FF;
+}
+
+/* Sign in - Sign up*/
+
+.app_signup_signup_sheet_signin {
+  font-family: Open Sans, Helvetica, Arial, EmojiFontFace, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #5f5f5f;
+  padding-right: 12px;
+  margin-bottom: 60px;
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.app_signup_signup_sheet_signin_link {
+  color: #BF402E;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.copyright_footer {
+  color: #BBB;
+  font-size: 13px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.copyright_footer a {
+  color: #BF402E;
+}
+
+.copyright_footer--content {
+  text-align: center;
+}
+
+@media (orientation: portrait) and (max-width: 414px), (orientation: landscape) and (max-height: 414px) {
+  .copyright_footer {
+    font-size: 11px;
+    padding: 0 25px;
+    line-height: 12px;
+  }
+}
