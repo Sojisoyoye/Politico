@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+  <title>Politico | Political Party</title>
+</head>
+
+<body>
+<div class="header">
+  <a class="header__link" href="/index.html">
+    <h1 class="header__logo">Politico</h1> 
+  </a>
+  <section class="menu__section">
+    <ul class="menu">
+      <li><a class="menu__item menu__item--selected" href="/index.html">Sign out</a></li>
+    </ul>
+  </section>
+</div>
+
+<main id="site-main" class="row">
+  <aside class="aside">
+    <nav class="aside__nav">
+      <ul>
+        <li><a href="/adminpage.html">Admin Section</a></li>
+        <li><a class="selected" href="/politicalparty.html">Political Parties</a></li>
+        <li><a href=".govtoffice.html">Government Offices</a></li>
+        <li><a href="">Candidates</a></li>
+      </ul>
+    </nav>
+  </aside>
+  
+  <section class="main">
+    <section class="political">
+      <div class="political__meta">
+        <h3 class="header1">Political Parties</h3>
+        <div class="sort">
+          <form>
+            <fieldset>
+              <legend>Create New Political Party</legend>
+              <input type="text" placeholder="Party Name" required>
+              <input type="text" placeholder="Party Acronym" required>
+              <label for="partylogo"> <span>Upload party logo: </span>
+              <input type="file" placeholder="Party logo" required>
+              </label>
+              <input type="submit" value="Create Party">
+            </fieldset>
+          </form>  
+        </div>
+      </div>
+      
+      <div class="table-wrapper no-flow">
+        <table class="political__table">
+          <thead>
+            <tr>
+              <th>Party ID</th>
+              <th>Party Name</th>
+              <th>Logo</th>
+              <th>Party Acronym</th>
+              <th style="text-align: center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>Accord</td>
+              <td><img src="img/Accord.jpg" style="width:100px" alt="accord"></td>
+              <td>A</td>
+              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
+            </tr>
+              <td>02</td>
+              <td>Action Alliance</td>
+              <td><img src="img/ActionAlliance.jpg" style="width:100px" alt="action alliance"></td>
+              <td>AA</td>
+              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>African Action Congress</td>
+              <td><img src="img/AAC.png" style="width:100px" alt="African action congress"></td>
+              <td>AAC</td>
+              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>Alliance for Democracy</td>
+              <td><img src="img/ad.png" style="width:100px" alt="Alliance for Democracy"></td>
+              <td>AD</td>
+              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>African Democratic Congress</td>
+              <td><img src="/img/adc.jpg" style="width:100px" alt="african democratic congress"></td>
+              <td>ADC</td>
+              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+</main>
+<div class="copyright_footer">
+    <div class="copyright_footer--content">
+        © Copyright 2019&nbsp;<a href="/" class="footer-legal-link" target="_blank">Politico</a>. All Rights Reserved.&nbsp;<a href="/" class="footer-legal-link" target="_blank">Privacy Policy</a>&nbsp;•&nbsp;<a href="" class="footer-legal-link" target="_blank">Terms of Use</a>
+    </div>
+</div>
+        
+</body>
+</html>
