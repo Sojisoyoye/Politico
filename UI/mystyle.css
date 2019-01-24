@@ -386,6 +386,19 @@ input.app_signup_text_input_input--with-errors {
   }
 }
 
+/* Password reset footer */
+
+.copyright_reset_footer {
+  color: #BBB;
+  font-size: 12px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 60px;
+}
+
 /* Signin Container */
 
 .SigninTabContainer {
