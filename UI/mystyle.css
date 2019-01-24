@@ -442,6 +442,43 @@ input.app_signin_text_input_input {
   margin-top: 8px;
 }
 
+/* Vote Container */
+
+.app_signup_vote_sheet_content_container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-bottom: 40px;
+  max-width: 510px;
+}
+.VoteTabContainer {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.VoteupTabContainer__tab--basic {
+  border-top-left-radius: 2px;
+  box-shadow: inset 8px 4px 0 #fff;
+}
+
+.app_signup_vote_sheet_info_message {
+  font-size: 32px;
+  letter-spacing: 0.5px;
+  min-height: 24px;
+  font-weight: 300;
+  text-align: center;
+  width: auto;
+  margin-bottom: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #444;
+}
+
 /* Admin Page */
 
 * {
