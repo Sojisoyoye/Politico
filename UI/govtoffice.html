@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+
+<body>
+  <div class="header">
+    <a class="header__link" href="/index.html">
+        <h1 class="header__logo">Politico</h1> 
+    </a>
+    <section class="menu__section">
+        <ul class="menu">
+            <li><a class="menu__item menu__item--selected" href="/index.html">Sign out</a></li>
+        </ul>
+    </section>
+  </div>
+  <main id="site-main" class="row">
+    <aside class="aside">
+      <nav class="aside__nav">
+        <ul>
+          <li><a href="adminpage.html">Admin Section</a></li>
+          <li><a href="politicalparty.html">Political Parties</a></li>
+          <li><a class="selected" href="govtoffice.html">Government Offices</a></li>
+          <li><a href="">Candidates</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <section class="main">
+      <section class="political">
+        <div class="political__meta">
+          <h3 class="header1">Government Offices</h3>
+          <div class="sort">
+            <form>
+              <fieldset>
+                <legend>Create Government Office</legend>
+                <input type="text" placeholder="Office Name" required>
+                <select name="" id="">
+                  <option value="">Federal</option>
+                  <option value="">State</option>
+                </select>
+                <select name="" id="">
+                  <option value="">Executive</option>
+                  <option value="">Legislative</option>
+                </select>
+                <input type="submit" value="Create Office">
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <div class="political__meta">
+          <h3 class="header1">List of Government Offices</h3>
+        </div>
+        <div class="table-wrapper no-flow">
+          <table class="political__table">
+            <thead>
+              <tr>
+                <th>Office ID</th>
+                <th>Office Name</th>
+                <th>Type</th>
+                <th>Branch</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01</td>
+                <td>Lagos State House of Reps. Ikeja Local Govt. </td>
+                <td>State</td>
+                <td>Legislative</td>
+              </tr>
+                <td>02</td>
+                <td>Senate, Lagos West Senatorial District</td>
+                <td>Federal</td>
+                <td>Legislative</td>
+              </tr>
+              <tr>
+                <td>03</td>
+                <td>Governor, Edo State</td>
+                <td>State</td>
+                <td>Executive</td>
+              </tr>
+              <tr>
+                <td>04</td>
+                <td>Local Govt. Chairman, Ayetoro Local Govt Area, Ogun state</td>
+                <td>State</td>
+                <td>Executive</td>
+              </tr>
+              <tr>
+                <td>05</td>
+                <td>Governor, Delta State</td>
+                <td>State</td>
+                <td>Executive</td>
+              </tr>
+              <tr>
+                <td>06</td>
+                <td>President</td>
+                <td>Federal</td>
+                <td>Executive</td>
+              </tr>
+              <tr>
+                <td>07</td>
+                <td>Local Government Chairman, Epe Local Govt. Area, Lagos State.</td>
+                <td>State</td>
+                <td>Executive</td>
+              </tr>
+              <tr>
+                <td>07</td>
+                <td>Local Government Chairman, Ewekoro Local Govt. Area, Ogun State.</td>
+                <td>State</td>
+                <td>Executive</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <section class="pagination">
+            <button class="pagination__prev">⬅ Previous Page</button>
+            <button class="pagination__next">Next Page ➡</button>
+    </section>
+  </section>
+</section>
+</main>
+
+<div class="copyright_footer">
+  <div class="copyright_footer--content">
+    © Copyright 2019&nbsp;<a href="/" class="footer-legal-link" target="_blank">Politico</a>. All Rights Reserved.&nbsp;<a href="/" class="footer-legal-link" target="_blank">Privacy Policy</a>&nbsp;•&nbsp;<a href="" class="footer-legal-link" target="_blank">Terms of Use</a>
+  </div>
+</div>
+        
+</body>
+</html>
