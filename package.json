@@ -4,7 +4,8 @@
   "description": "A platform for both the politicians and citizens, which enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node_modules/.bin/nodemon ./server/app.js --exec babel-node",
+    "test": "mocha --require babel-register ./server/test --recursive --runInBand --exit"
   },
   "repository": {
     "type": "git",
@@ -17,11 +18,16 @@
   },
   "homepage": "https://github.com/Sojisoyoye/Politico#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "chai-http": "^4.2.1",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.15.0",
