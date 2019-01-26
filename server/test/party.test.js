@@ -5,7 +5,7 @@ import app from '../app';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('POST political party', () => {
+describe('/POST political party', () => {
   it('should add a new political party if details are correct', (done) => {
     chai
       .request(app)
@@ -19,6 +19,21 @@ describe('POST political party', () => {
       .end((err, res) => {
         expect(res).to.have.status(201);
         expect(res.body.status).to.be.equal(201);
+        expect(res.body).to.be.an('object');
+        expect(res.body.data).to.be.an('array');
+        done(err);
+      });
+  });
+});
+
+describe('/GET political parties', () => {
+  it('should get the list of all the political parties', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/parties')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.status).to.equal(200);
         expect(res.body).to.be.an('object');
         expect(res.body.data).to.be.an('array');
         done(err);

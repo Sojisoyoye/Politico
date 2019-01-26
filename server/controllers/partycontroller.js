@@ -20,7 +20,7 @@ class PartyController {
     } = req.body;
 
     const id = partyDb.length + 1;
-    const recordData = {
+    const partyData = {
       id,
       name,
       hqAddress,
@@ -28,12 +28,23 @@ class PartyController {
       Acroymn,
     };
 
-    partyDb.concat(recordData);
+    partyDb.push(partyData);
 
     res.status(201).json({
       status: 201,
       data: [{ id, message: 'Party Added Successfully' }],
     });
+  }
+
+  /**
+   * @method getParties
+   * @description Gets the list of parties
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static getParties(req, res) {
+    res.status(200).json({ status: 200, data: [...partyDb] });
   }
 }
 
