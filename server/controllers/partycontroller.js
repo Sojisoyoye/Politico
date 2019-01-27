@@ -67,6 +67,28 @@ class PartyController {
       error: 'party record not found',
     });
   }
+
+  /**
+   * @method updateName
+   * @description Updates the name of a specific political party
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static updateName(req, res) {
+    const partyID = parseInt(req.params.id, 10);
+    const { name } = req.body;
+
+    partyDb.forEach((party, partyIndex) => {
+      if (partyID === party.id) {
+        partyDb[partyIndex].name = `${name}`;
+      }
+    });
+    return res.status(200).json({
+      status: 200, data: [{ id: partyID, message: 'Updated political party\'s name' }],
+    });
+  }
 }
+
 
 export default PartyController;

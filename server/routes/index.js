@@ -13,4 +13,6 @@ router.get('/parties', PartyController.getParties);
 
 router.get('/parties/:id', PartyController.getAParty);
 
+router.patch('/parties/:id/name', PartyController.updateName);
+
 export default router;
