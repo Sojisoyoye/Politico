@@ -88,6 +88,26 @@ class PartyController {
       status: 200, data: [{ id: partyID, message: 'Updated political party\'s name' }],
     });
   }
+
+  /**
+   * @method deleteParty
+   * @description Deletes a specific political party
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static deleteParty(req, res) {
+    const partyID = parseInt(req.params.id, 10);
+
+    partyDb.forEach((party, partyIndex) => {
+      if (partyID === party.id) {
+        partyDb.splice(partyIndex, 1);
+      }
+    });
+    return res.status(200).json({
+      status: 200, data: [{ id: partyID, message: 'Political party deleted successfully' }],
+    });
+  }
 }
 
 

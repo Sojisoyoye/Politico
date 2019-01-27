@@ -78,3 +78,18 @@ describe('/PATCH a specific political party', () => {
       });
   });
 });
+
+describe('/DELETE a specific political party', () => {
+  it('should delete a specific political party', (done) => {
+    chai
+      .request(app)
+      .delete('/api/v1/parties/1')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data[0].id).to.be.equal(1);
+        done(err);
+      });
+  });
+});

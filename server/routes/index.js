@@ -15,4 +15,6 @@ router.get('/parties/:id', PartyController.getAParty);
 
 router.patch('/parties/:id/name', PartyController.updateName);
 
+router.delete('/parties/:id', PartyController.deleteParty);
+
 export default router;
