@@ -65,3 +65,16 @@ describe('/GET political parties', () => {
       });
   });
 });
+
+describe('/PATCH a specific political party', () => {
+  it('should update the name of a political party', (done) => {
+    chai
+      .request(app)
+      .patch('/api/v1/parties/1/name')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.status).to.equal(200);
+        done(err);
+      });
+  });
+});
