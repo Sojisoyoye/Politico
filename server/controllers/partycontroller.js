@@ -46,6 +46,27 @@ class PartyController {
   static getParties(req, res) {
     res.status(200).json({ status: 200, data: [...partyDb] });
   }
+
+  /**
+   * @method getAParty
+   * @description Retrieves a specific party with a given iID
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static getAParty(req, res) {
+    const data = partyDb.find(partyObj => partyObj.id === parseInt(req.params.id, 10));
+    if (data) {
+      return res.status(200).json({
+        status: 200,
+        data,
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'party record not found',
+    });
+  }
 }
 
 export default PartyController;

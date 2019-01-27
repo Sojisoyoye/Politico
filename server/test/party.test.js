@@ -39,4 +39,29 @@ describe('/GET political parties', () => {
         done(err);
       });
   });
+
+  it('should get a specific political party', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/parties/1')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body).to.be.an('object');
+        done(err);
+      });
+  });
+
+  it('should return an error if party does not exist', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/parties/10')
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.status).to.equal(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('party record not found');
+        done(err);
+      });
+  });
 });
