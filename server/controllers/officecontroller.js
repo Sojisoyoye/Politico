@@ -38,6 +38,17 @@ class OfficeController {
       }],
     });
   }
+
+  /**
+   * @method getOffices
+   * @description Gets the list of offices
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static getOffices(req, res) {
+    res.status(200).json({ status: 200, data: [...officeDb] });
+  }
 }
 
 export default OfficeController;

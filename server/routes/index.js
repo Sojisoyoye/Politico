@@ -20,4 +20,6 @@ router.delete('/parties/:id', PartyController.deleteParty);
 
 router.post('/offices', OfficeController.postOffice);
 
+router.get('/offices', OfficeController.getOffices);
+
 export default router;
