@@ -1,5 +1,6 @@
 import express from 'express';
 import PartyController from '../controllers/partycontroller';
+import OfficeController from '../controllers/officecontroller';
 
 const router = express.Router();
 
@@ -16,5 +17,7 @@ router.get('/parties/:id', PartyController.getAParty);
 router.patch('/parties/:id/name', PartyController.updateName);
 
 router.delete('/parties/:id', PartyController.deleteParty);
+
+router.post('/offices', OfficeController.postOffice);
 
 export default router;

@@ -9,7 +9,7 @@ import partyDb from '../models/parties';
 class PartyController {
   /**
    * @method postParty
-   * @description Posts the given record to the database
+   * @description Posts the given party details to the database
    * @param {object} req - The Request Object
    * @param {object} res - The Response Object
    * @returns {object} JSON API Response
