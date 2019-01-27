@@ -74,6 +74,7 @@ describe('/PATCH a specific political party', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body.status).to.equal(200);
+        expect(res.body.data).to.be.an('array');
         done(err);
       });
   });

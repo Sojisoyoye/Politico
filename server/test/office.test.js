@@ -37,4 +37,29 @@ describe('/GET political offices', () => {
         done(err);
       });
   });
+
+  it('should get a specific political office', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/offices/1')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body).to.be.an('object');
+        done(err);
+      });
+  });
+
+  it('should return an error if office does not exist', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/offices/10')
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.status).to.equal(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('office record not found');
+        done(err);
+      });
+  });
 });

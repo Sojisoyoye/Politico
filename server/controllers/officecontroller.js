@@ -49,6 +49,27 @@ class OfficeController {
   static getOffices(req, res) {
     res.status(200).json({ status: 200, data: [...officeDb] });
   }
+
+  /**
+   * @method getAOffice
+   * @description Retrieves a specific office with a given iID
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static getAOffice(req, res) {
+    const data = officeDb.find(officeObj => officeObj.id === parseInt(req.params.id, 10));
+    if (data) {
+      return res.status(200).json({
+        status: 200,
+        data,
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'office record not found',
+    });
+  }
 }
 
 export default OfficeController;
