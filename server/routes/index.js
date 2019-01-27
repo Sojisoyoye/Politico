@@ -22,4 +22,6 @@ router.post('/offices', OfficeController.postOffice);
 
 router.get('/offices', OfficeController.getOffices);
 
+router.get('/offices/:id', OfficeController.getAOffice);
+
 export default router;
