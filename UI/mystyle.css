@@ -21,7 +21,8 @@ html, body {
   
   a {
     text-decoration: none;
-    color: rgb(192, 63, 54);
+    /* color: rgb(192, 63, 54); */
+    color: #000000;
     transition: all .15s ease-in-out;
   }
   
@@ -202,13 +203,13 @@ button {
     margin-bottom: 16px;
     font-size: 14px;
     color: #212121;
-    background-color: #66bb6a;
+    background-color: #42a5f5;
     height: 40px;
     border-radius: 5px;
 }
 
 button:hover {
-    background-color: #4caf50;
+    background-color: #64b5f6;
 }
 
 @media (orientation: portrait) and (max-width: 414px), (orientation: landscape) and (max-height: 414px) {
@@ -355,7 +356,7 @@ input.app_signup_text_input_input--with-errors {
 }
 
 .app_signup_signup_sheet_signin_link {
-  color: #BF402E;
+  color: #000;
   text-decoration: none;
   margin-left: 4px;
 }
@@ -371,7 +372,7 @@ input.app_signup_text_input_input--with-errors {
 }
 
 .copyright_footer a {
-  color: #BF402E;
+  color: #000;
 }
 
 .copyright_footer--content {
