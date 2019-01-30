@@ -6,6 +6,8 @@
   <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 
+<title>Politico | Government Office</title>
+
 <body>
   <div class="header">
     <a class="header__link" href="index.html">
@@ -28,27 +30,59 @@
         </ul>
       </nav>
     </aside>
+
+
     <section class="main">
       <section class="political">
         <div class="political__meta">
           <h3 class="header1">Government Offices</h3>
           <div class="sort">
-            <form>
-              <fieldset>
-                <legend>Create Government Office</legend>
-                <input type="text" placeholder="Office Name" required>
-                <select name="" id="">
-                  <option value="">Federal</option>
-                  <option value="">State</option>
-                </select>
-                <select name="" id="">
-                  <option value="">Executive</option>
-                  <option value="">Legislative</option>
-                </select>
-                <input type="submit" value="Create Office">
-              </fieldset>
-            </form>
+            <div class="add-new">
+                <fieldset>
+                    <legend>Create New Government Office</legend>
+                    <form class="sort-add">
+    
+                        <div class="app_signup_text_input_outer">
+                            <label for="officename">
+                              <div class="app_signup_text_input_label_text">
+                                  <span>Office Name</span>
+                              </div>
+                              <input type="text" placeholder="Enter name.." class="app_signin_text_pol_input_input" required>
+                              </label>
+                        </div>
+    
+    
+                        <div class="app_signup_text_input_outer">
+                            <label for="officetype">
+                                <div class="app_signup_text_input_label_text">
+                                    <span>Office Type</span>
+                                </div>
+                            <select name="" id="">
+                                <option value="">Federal</option>
+                                <option value="">State</option>
+                              </select>
+                            </label>
+                        </div>
+    
+    
+                        <div class="app_signup_text_input_outer">
+                            <label for="officebranch">
+                                <div class="app_signup_text_input_label_text">
+                                    <span>Office Branch</span>
+                                </div>
+                            <select name="" id="">
+                                <option value="">Executive</option>
+                                <option value="">Legislative</option>
+                              </select>
+                            </label>
+                        </div>
+                        <button class="add-party-button">Create</button>
+    
+                    </form>
+                  </fieldset>
+            </div>
           </div>
+
         </div>
         <div class="political__meta">
           <h3 class="header1">List of Government Offices</h3>

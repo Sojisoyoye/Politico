@@ -29,6 +29,7 @@
             <li><a class="selected" href="allpoliticalparty.html">All Political Parties</a></li>
             <li><a href="allgovtoffices.html">Government Offices</a></li>
             <li><a href="">Edit Profile</a></li>
+            <li><a href="registertorun.html">Register to Run</a></li>
           </ul>
         </nav>
       </aside>
@@ -38,26 +39,32 @@
           <div class="political__meta">
             <h3 class="header1">Political Parties</h3>
             <p>There are 91 registered political parties</p>
+
             <div class="sort">
               <form>
+
                 <fieldset>
                   <legend>Filter Rows</legend>
-                  <select name="" id="">
+                  <select class="filter-record">
                     <option value="">10 Records</option>
                     <option value="">50 Records</option>
                     <option value="">100 Records</option>
                   </select>
-                  <input type="submit" value="Retrieve Records">
                 </fieldset>
+
               </form>
-              <form id="sort__id" action="">
+
+              <form id="sort__id">
                 <fieldset>
                         <legend>Search for a Party</legend>
-                        <input type="text" placeholder="Enter party name">
-                        <input type="submit" value="Search">
+                        <input class= "search-input" type="text" placeholder="Enter party name">
+                        <button>Search</button> 
+                         <!-- <input type="submit" value="Search"> -->
                 </fieldset>
               </form>
               </div>
+
+
             </div>
                    
             <div class="table-wrapper no-flow">

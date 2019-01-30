@@ -37,17 +37,75 @@
       <div class="political__meta">
         <h3 class="header1">Political Parties</h3>
         <div class="sort">
-          <form>
-            <fieldset>
-              <legend>Create New Political Party</legend>
-              <input type="text" placeholder="Party Name" required>
-              <input type="text" placeholder="Party Acronym" required>
-              <label for="partylogo"> <span>Upload party logo: </span>
-              <input type="file" placeholder="Party logo" required>
-              </label>
-              <input type="submit" value="Create Party">
-            </fieldset>
-          </form>  
+          <div class="add-new">
+              <fieldset>
+                  <legend>Create New Political Party</legend>
+                <form class="sort-add"> 
+
+                  <div class="app_signup_text_input_outer">
+
+                      <label for="partyname">
+                        <div class="app_signup_text_input_label_text">
+                            <span>Party Name</span>
+                        </div>
+                        <input type="text" placeholder="Enter name.." class="app_signin_text_pol_input_input" required>
+                        </label>
+
+                  </div>
+
+                  <div class="app_signup_text_input_outer">
+
+                      <label for="partyaddress">
+                        <div class="app_signup_text_input_label_text">
+                            <span>Party Address</span>
+                        </div>
+                        <input type="text" placeholder="Enter address.." class="app_signin_text_pol_input_input" required>
+                        </label>
+
+                  </div>
+
+                  <div class="app_signup_text_input_outer">
+
+                      <label for="partyacroymn">
+                        <div class="app_signup_text_input_label_text">
+                            <span>Party Acroymn</span>
+                        </div>
+                        <input type="text" placeholder="Enter acroymn.." class="app_signin_text_pol_input_input" required>
+                        </label>
+
+                  </div>
+
+                  <div class="app_signup_text_input_outer">
+
+                      <label for="partyacroymn">
+                        <div class="app_signup_text_input_label_text">
+                            <span>Party Logo</span>
+                        </div>
+                        <input type="file" placeholder="logo.." class="app_signin_text_pol_input_input" required>
+                        </label>
+
+                  </div>
+
+                  <button class="add-party-button">Create</button>
+                  
+
+                  <!-- <label for="partyaddress">
+                      <span>Party Name</span>
+                        <input type="text" placeholder="Enter address.." required>
+                    </label>
+                  <label for="partyacroymn">
+                    <span>Party Acronym</span>
+                      <input type="text" placeholder="Enter acronym.." required>
+                  </label>
+                  <label for="partylogo"> 
+                    <span>Upload party logo </span>
+                  <input type="file" placeholder="Party logo" required>
+                  </label> -->
+                  <!-- <input type="submit" value="Create Party"> -->
+                </form>
+                </fieldset>
+          </div>
+          
         </div>
       </div>
       
@@ -83,6 +141,7 @@
               <td>AAC</td>
               <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
             </tr>
+            
             <tr>
               <td>04</td>
               <td>Alliance for Democracy</td>
@@ -102,6 +161,10 @@
         </div>
       </div>
     </div>
+    <section class="pagination">
+        <button class="pagination__prev">⬅ Previous Page</button>
+        <button class="pagination__next">Next Page ➡</button>
+    </section>
   </section>
 </section>
 </main>

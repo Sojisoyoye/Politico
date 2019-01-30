@@ -29,6 +29,7 @@
           <li><a href="allpoliticalparty.html">All Political Parties</a></li>
           <li><a class="selected" href="allgovtoffices.html">Government Offices</a></li>
           <li><a href="">Edit Profile</a></li>
+          <li><a href="registertorun.html">Register to Run</a></li>
         </ul>
       </nav>
     </aside>
@@ -37,13 +38,20 @@
       <section class="political">
         <div class="political__meta">
           <h3 class="header1">Government Offices</h3>
-          <p>Enter an Office name in the search field to view the candidates running for that specific office</p>
+          <p>Filter an Office name in the field below to view the candidates running for that specific office.</p>
         <div class="sort">
           <form>
             <fieldset>
-                    <legend>Office Name</legend>
-                    <input type="text" placeholder="Enter office name">
-                    <input type="submit" value="View">
+                    <legend>Filter Office name</legend>
+                    <select class="filter-record">
+                        <option value="">President</option>
+                        <option value="">Governor</option>
+                        <option value="">Federal House of Reps.</option>
+                        <option value="">Local Govt. Chairman</option>
+                      </select>
+                   <!-- <input class="search-input" type="text" placeholder="Enter office name"> -->
+                    <!-- <button>View</button> -->
+                    <input type="submit" value="View"> 
             </fieldset> 
           </form>  
         </div>
