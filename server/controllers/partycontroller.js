@@ -1,4 +1,4 @@
-import partyDb from '../models/parties';
+import PartyHelper from '../helpers/partyHelper';
 
 /**
  * @class PartyController
@@ -16,57 +16,65 @@ class PartyController {
    */
   static postParty(req, res) {
     const {
-      name, hqAddress, logoUrl, Acroymn,
+      name, hqAddress, logoUrl, acroymn,
     } = req.body;
-
-    const id = partyDb.length + 1;
-    const partyData = {
-      id,
+    const newParty = PartyHelper.createParty({
       name,
       hqAddress,
       logoUrl,
-      Acroymn,
-    };
-
-    partyDb.push(partyData);
-
+      acroymn,
+    }); if (!req.body.name) {
+      res.status(400).json({
+        status: 400,
+        error: 'Name is required',
+      });
+      return;
+    }
     res.status(201).json({
       status: 201,
-      data: [{ id, message: 'Party Added Successfully' }],
+      data: [{ newParty, message: 'Party created successfully' }],
     });
   }
 
   /**
+   *
    * @method getParties
    * @description Gets the list of parties
-   * @param {object} req - The Request Object
-   * @param {object} res - The Response Object
+   * @param {*} req - The Request Object
+   * @param {*} res - The Response Object
    * @returns {object} JSON API Response
    */
   static getParties(req, res) {
-    res.status(200).json({ status: 200, data: [...partyDb] });
+    const parties = PartyHelper.allParties();
+    res.status(200).json({
+      status: 200,
+      data: [{ parties, message: 'All political parties retreived succesfully' }],
+    });
   }
 
   /**
    * @method getAParty
-   * @description Retrieves a specific party with a given iID
+    * @description Retrieves a specific party with a given iID
    * @param {object} req - The Request Object
    * @param {object} res - The Response Object
-   * @returns {object} JSON API Response
+    * @returns {object} JSON API Response
    */
   static getAParty(req, res) {
-    const data = partyDb.find(partyObj => partyObj.id === parseInt(req.params.id, 10));
-    if (data) {
-      return res.status(200).json({
-        status: 200,
-        data,
+    const partyId = parseInt(req.params.id, 10);
+    const party = PartyHelper.getSingleParty(partyId);
+    if (!party.length) {
+      res.status(404).json({
+        status: 404,
+        error: 'party record not found',
       });
+      return;
     }
-    return res.status(404).json({
-      status: 404,
-      error: 'party record not found',
+    res.status(200).json({
+      status: 200,
+      data: [{ party, message: 'Party retreived successfully' }],
     });
   }
+
 
   /**
    * @method updateName
@@ -76,16 +84,27 @@ class PartyController {
    * @returns {object} JSON API Response
    */
   static updateName(req, res) {
-    const partyID = parseInt(req.params.id, 10);
-    const { name } = req.body;
-
-    partyDb.forEach((party, partyIndex) => {
-      if (partyID === party.id) {
-        partyDb[partyIndex].name = `${name}`;
-      }
+    const id = parseInt(req.params.id, 10);
+    const {
+      name, hqAddress, logoUrl, acroymn,
+    } = req.body;
+    const updatedParty = PartyHelper.editName({
+      id,
+      name,
+      hqAddress,
+      logoUrl,
+      acroymn,
     });
-    return res.status(200).json({
-      status: 200, data: [{ id: partyID, message: 'Updated political party\'s name' }],
+    if (!updatedParty.length) {
+      res.status(404).json({
+        status: 404,
+        error: 'product record not found',
+      });
+      return;
+    }
+    res.status(200).json({
+      status: 200,
+      data: [{ message: 'Name updated successfully' }],
     });
   }
 
@@ -94,18 +113,22 @@ class PartyController {
    * @description Deletes a specific political party
    * @param {object} req - The Request Object
    * @param {object} res - The Response Object
+   * @returns {boolean} Deletion status
    * @returns {object} JSON API Response
    */
   static deleteParty(req, res) {
-    const partyID = parseInt(req.params.id, 10);
-
-    partyDb.forEach((party, partyIndex) => {
-      if (partyID === party.id) {
-        partyDb.splice(partyIndex, 1);
-      }
-    });
-    return res.status(200).json({
-      status: 200, data: [{ id: partyID, message: 'Political party deleted successfully' }],
+    const partyId = parseInt(req.params.id, 10);
+    const isDeleted = PartyHelper.removeParty(partyId);
+    if (!isDeleted) {
+      res.status(404).json({
+        status: 404,
+        error: 'party record not found',
+      });
+      return;
+    }
+    res.status(200).json({
+      status: 200,
+      data: [{ message: 'Party deleted succesfully' }],
     });
   }
 }

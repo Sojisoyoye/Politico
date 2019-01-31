@@ -12,15 +12,34 @@ describe('/POST political party', () => {
       .post('/api/v1/parties')
       .send({
         name: 'Accord',
-        hqAdress: '6, Olowo Street, Ondo',
+        hqAddress: '6, Olowo Street, Ondo',
         logoUrl: 'www.accord.com',
-        Acroymn: 'A',
+        acroymn: 'A',
       })
       .end((err, res) => {
         expect(res).to.have.status(201);
         expect(res.body.status).to.be.equal(201);
         expect(res.body).to.be.an('object');
         expect(res.body.data).to.be.an('array');
+        done(err);
+      });
+  });
+
+  it('should not add a new political party if name is not provided', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/parties')
+      .send({
+        name: '',
+        hqAddress: '6, Olowo Street, Ondo',
+        logoUrl: 'www.accord.com',
+        acroymn: 'A',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.status).to.be.equal(400);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('Name is required');
         done(err);
       });
   });
@@ -48,6 +67,7 @@ describe('/GET political parties', () => {
         expect(res).to.have.status(200);
         expect(res.body.status).to.equal(200);
         expect(res.body).to.be.an('object');
+        expect(res.body.data).to.be.an('array');
         done(err);
       });
   });
@@ -89,7 +109,6 @@ describe('/DELETE a specific political party', () => {
         expect(res).to.have.status(200);
         expect(res.body.status).to.equal(200);
         expect(res.body.data).to.be.an('array');
-        expect(res.body.data[0].id).to.be.equal(1);
         done(err);
       });
   });

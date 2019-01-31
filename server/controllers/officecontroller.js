@@ -1,4 +1,4 @@
-import officeDb from '../models/offices';
+import OfficeHelper from '../helpers/officeHelper';
 
 /**
  * @class OfficeController
@@ -18,24 +18,24 @@ class OfficeController {
     const {
       type, name,
     } = req.body;
-
-    const id = officeDb.length + 1;
-    const officeData = {
-      id,
+    const newOffice = OfficeHelper.createOffice({
       type,
       name,
-    };
-
-    officeDb.push(officeData);
-
+    }); if (!req.body.type) {
+      res.status(400).json({
+        status: 400,
+        data: [{ error: 'type is required' }],
+      }); if (!req.body.name) {
+        res.status(400).json({
+          status: 400,
+          data: [{ error: 'name is required' }],
+        });
+      }
+      return;
+    }
     res.status(201).json({
       status: 201,
-      data: [{
-        id,
-        type,
-        name,
-        message: 'Office Created Successfully',
-      }],
+      data: [{ newOffice, message: 'Office created successfully' }],
     });
   }
 
@@ -47,7 +47,11 @@ class OfficeController {
    * @returns {object} JSON API Response
    */
   static getOffices(req, res) {
-    res.status(200).json({ status: 200, data: [...officeDb] });
+    const offices = OfficeHelper.allOffices();
+    res.status(200).json({
+      status: 200,
+      data: [{ offices, message: 'All government offices retreived succesfully' }],
+    });
   }
 
   /**
@@ -58,16 +62,18 @@ class OfficeController {
    * @returns {object} JSON API Response
    */
   static getAOffice(req, res) {
-    const data = officeDb.find(officeObj => officeObj.id === parseInt(req.params.id, 10));
-    if (data) {
-      return res.status(200).json({
-        status: 200,
-        data,
+    const officeId = parseInt(req.params.id, 10);
+    const office = OfficeHelper.getSingleOffice(officeId);
+    if (!office.length) {
+      res.status(404).json({
+        status: 404,
+        error: 'office record not found',
       });
+      return;
     }
-    return res.status(404).json({
-      status: 404,
-      error: 'office record not found',
+    res.status(200).json({
+      status: 200,
+      data: [{ office, message: 'Office retreived successfully' }],
     });
   }
 }
