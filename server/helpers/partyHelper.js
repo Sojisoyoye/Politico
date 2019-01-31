@@ -27,7 +27,7 @@ class PartyHelper {
 
   /**
    *
-   * @description Helper method that gets current parties from the data structure
+   * @description Helper method that gets current parties from the data store
    * @static
    * @returns {object} An array of objects of the parties
    */
@@ -37,7 +37,7 @@ class PartyHelper {
 
   /**
    *
-   * @description Helper method that gets a single party from the data structure
+   * @description Helper method that gets a single party from the data store
    * @static
    * @returns {object} An array of object of the party
    * @param {*} partyId Id of the party to be retrieved
@@ -79,7 +79,7 @@ class PartyHelper {
 
   /**
    *
-   * @description Helper method that delete a party
+   * @description Helper method that deletes a party
    * @static
    * @param {*} partyId Party ID of the party to be deleted
    */

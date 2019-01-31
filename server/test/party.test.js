@@ -36,10 +36,7 @@ describe('/POST political party', () => {
         acroymn: 'A',
       })
       .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body.status).to.be.equal(400);
-        expect(res.body).to.be.an('object');
-        expect(res.body.error).to.equal('Name is required');
+        expect(res).to.have.status(422);
         done(err);
       });
   });

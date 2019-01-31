@@ -56,7 +56,7 @@ class OfficeController {
 
   /**
    * @method getAOffice
-   * @description Retrieves a specific office with a given iID
+   * @description Retrieves a specific office with a given ID
    * @param {object} req - The Request Object
    * @param {object} res - The Response Object
    * @returns {object} JSON API Response

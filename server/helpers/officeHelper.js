@@ -2,7 +2,7 @@ import offices from '../models/offices';
 
 /**
  *
- * @description Helper class that handles request to the  offices data store
+ * @description Helper class that handles request to the offices data store
  * @class OfficeHelper
  */
 class OfficeHelper {
@@ -25,7 +25,7 @@ class OfficeHelper {
 
   /**
      *
-     * @description Helper method that gets current offices from the data structure
+     * @description Helper method that gets current offices from the data store
      * @static
      * @returns {object} An array of objects of the offices
      */
@@ -35,7 +35,7 @@ class OfficeHelper {
 
   /**
      *
-     * @description Helper method that gets a single office from the data structure
+     * @description Helper method that gets a single office from the data store
      * @static
      * @returns {object} An array of object of the office
      * @param {*} officeId Id of the office to be retrieved

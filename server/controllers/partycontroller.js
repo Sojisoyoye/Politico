@@ -23,16 +23,10 @@ class PartyController {
       hqAddress,
       logoUrl,
       acroymn,
-    }); if (!req.body.name) {
-      res.status(400).json({
-        status: 400,
-        error: 'Name is required',
-      });
-      return;
-    }
+    });
     res.status(201).json({
       status: 201,
-      data: [{ newParty, message: 'Party created successfully' }],
+      data: [{ newParty, message: 'party created successfully ' }],
     });
   }
 
@@ -40,8 +34,8 @@ class PartyController {
    *
    * @method getParties
    * @description Gets the list of parties
-   * @param {*} req - The Request Object
-   * @param {*} res - The Response Object
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
    * @returns {object} JSON API Response
    */
   static getParties(req, res) {
@@ -54,10 +48,10 @@ class PartyController {
 
   /**
    * @method getAParty
-    * @description Retrieves a specific party with a given iID
+   * @description Retrieves a specific party with a given ID
    * @param {object} req - The Request Object
    * @param {object} res - The Response Object
-    * @returns {object} JSON API Response
+   * @returns {object} JSON API Response
    */
   static getAParty(req, res) {
     const partyId = parseInt(req.params.id, 10);
@@ -71,7 +65,7 @@ class PartyController {
     }
     res.status(200).json({
       status: 200,
-      data: [{ party, message: 'Party retreived successfully' }],
+      data: [{ party, message: 'party retreived successfully' }],
     });
   }
 
@@ -86,25 +80,22 @@ class PartyController {
   static updateName(req, res) {
     const id = parseInt(req.params.id, 10);
     const {
-      name, hqAddress, logoUrl, acroymn,
+      name,
     } = req.body;
     const updatedParty = PartyHelper.editName({
       id,
       name,
-      hqAddress,
-      logoUrl,
-      acroymn,
     });
     if (!updatedParty.length) {
       res.status(404).json({
         status: 404,
-        error: 'product record not found',
+        error: 'party record not found',
       });
       return;
     }
     res.status(200).json({
       status: 200,
-      data: [{ message: 'Name updated successfully' }],
+      data: [{ message: 'name updated successfully' }],
     });
   }
 
@@ -128,7 +119,7 @@ class PartyController {
     }
     res.status(200).json({
       status: 200,
-      data: [{ message: 'Party deleted succesfully' }],
+      data: [{ message: 'party deleted succesfully' }],
     });
   }
 }
