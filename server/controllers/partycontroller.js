@@ -1,3 +1,4 @@
+import parties from '../models/parties';
 import PartyHelper from '../helpers/partyHelper';
 
 /**
@@ -18,7 +19,7 @@ class PartyController {
     const {
       name, hqAddress, logoUrl, acroymn,
     } = req.body;
-    const newParty = PartyHelper.createParty({
+    const party = PartyHelper.createParty({
       name,
       hqAddress,
       logoUrl,
@@ -26,7 +27,10 @@ class PartyController {
     });
     res.status(201).json({
       status: 201,
-      data: [{ newParty, message: 'party created successfully ' }],
+      data: [{
+        id: party.id,
+        name: party.name,
+      }],
     });
   }
 
@@ -39,10 +43,10 @@ class PartyController {
    * @returns {object} JSON API Response
    */
   static getParties(req, res) {
-    const parties = PartyHelper.allParties();
+    PartyHelper.allParties();
     res.status(200).json({
       status: 200,
-      data: [{ parties, message: 'All political parties retreived succesfully' }],
+      data: [...parties],
     });
   }
 
@@ -56,7 +60,7 @@ class PartyController {
   static getAParty(req, res) {
     const partyId = parseInt(req.params.id, 10);
     const party = PartyHelper.getSingleParty(partyId);
-    if (!party.length) {
+    if (!party) {
       res.status(404).json({
         status: 404,
         error: 'party record not found',
@@ -65,7 +69,7 @@ class PartyController {
     }
     res.status(200).json({
       status: 200,
-      data: [{ party, message: 'party retreived successfully' }],
+      data: party,
     });
   }
 
@@ -95,7 +99,7 @@ class PartyController {
     }
     res.status(200).json({
       status: 200,
-      data: [{ message: 'name updated successfully' }],
+      data: updatedParty,
     });
   }
 

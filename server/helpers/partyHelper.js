@@ -22,7 +22,7 @@ class PartyHelper {
       acroymn: newParty.acroymn,
     };
     parties.push(createdParty);
-    return [createdParty];
+    return createdParty;
   }
 
   /**
@@ -51,6 +51,7 @@ class PartyHelper {
     });
     return partyFound;
   }
+
 
   /**
    *
