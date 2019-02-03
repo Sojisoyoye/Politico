@@ -1,8 +1,11 @@
+import 'babel-polyfill';
 import express from 'express';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import router from './routes';
 
+dotenv.config();
 const app = express();
 app.use(express.json());
 

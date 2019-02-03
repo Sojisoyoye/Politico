@@ -1,12 +1,12 @@
-import OfficeHelper from '../helpers/officeHelper';
+import db from '../models/index';
 
 /**
- * @class OfficeController
+ * OfficeController
  * @description Specifies which method handles a given request for a specific endpoint
  * @exports OfficeController
  */
 
-class OfficeController {
+const OfficeController = {
   /**
    * @method postOffice
    * @description Posts the given office details to the database
@@ -14,30 +14,34 @@ class OfficeController {
    * @param {object} res - The Response Object
    * @returns {object} JSON API Response
    */
-  static postOffice(req, res) {
-    const {
-      type, name,
-    } = req.body;
-    const newOffice = OfficeHelper.createOffice({
-      type,
-      name,
-    }); if (!req.body.type) {
-      res.status(400).json({
-        status: 400,
-        data: [{ error: 'type is required' }],
-      }); if (!req.body.name) {
-        res.status(400).json({
+  async postOffice(req, res) {
+    const text = `INSERT INTO offices(type, name)
+    VALUES($1, $2)
+    RETURNING *`;
+    const values = [
+      req.body.type,
+      req.body.name,
+    ];
+
+    try {
+      const { rows } = await db.query(text, values);
+      if (!req.body.name) {
+        return res.status(400).json({
           status: 400,
-          data: [{ error: 'name is required' }],
+          error: 'name must be entered',
         });
       }
-      return;
+      return res.status(201).json({
+        status: 200,
+        data: rows[0],
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'can not create office',
+      });
     }
-    res.status(201).json({
-      status: 201,
-      data: [{ newOffice, message: 'Office created successfully' }],
-    });
-  }
+  },
 
   /**
    * @method getOffices
@@ -46,13 +50,21 @@ class OfficeController {
    * @param {object} res - The Response Object
    * @returns {object} JSON API Response
    */
-  static getOffices(req, res) {
-    const offices = OfficeHelper.allOffices();
-    res.status(200).json({
-      status: 200,
-      data: [{ offices, message: 'All government offices retreived succesfully' }],
-    });
-  }
+  async getOffices(req, res) {
+    const findAllQuery = 'SELECT * FROM offices';
+    try {
+      const { rows } = await db.query(findAllQuery);
+      return res.status(200).json({
+        status: 200,
+        data: rows,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'can not retrieve offices record',
+      });
+    }
+  },
 
   /**
    * @method getAOffice
@@ -61,21 +73,27 @@ class OfficeController {
    * @param {object} res - The Response Object
    * @returns {object} JSON API Response
    */
-  static getAOffice(req, res) {
-    const officeId = parseInt(req.params.id, 10);
-    const office = OfficeHelper.getSingleOffice(officeId);
-    if (!office.length) {
-      res.status(404).json({
-        status: 404,
-        error: 'office record not found',
+  async getAOffice(req, res) {
+    const text = 'SELECT * FROM offices WHERE id = $1';
+    try {
+      const { rows } = await db.query(text, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          error: 'office record not found',
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: rows[0],
       });
-      return;
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'can not retreive office record',
+      });
     }
-    res.status(200).json({
-      status: 200,
-      data: [{ office, message: 'Office retreived successfully' }],
-    });
-  }
-}
+  },
+};
 
 export default OfficeController;
