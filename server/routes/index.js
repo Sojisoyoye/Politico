@@ -3,7 +3,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import PartyController from '../controllers/partycontroller';
 import OfficeController from '../controllers/officecontroller';
-//  import validation from '../middleware/validator';
+import UserController from '../controllers/usercontroller';
+import VoteController from '../controllers/votecontroller';
+
 
 dotenv.config();
 const router = express.Router();
@@ -27,6 +29,22 @@ router.post('/offices', OfficeController.postOffice);
 router.get('/offices', OfficeController.getOffices);
 
 router.get('/offices/:id', OfficeController.getAOffice);
+
+// Sign up and log in
+
+router.post('/auth/signup', UserController.createUser);
+
+router.post('/auth/login', UserController.loginUser);
+
+// Other endpoints
+
+router.post('/office/:id/register', OfficeController.registerUser);
+
+router.post('/office/:id/result', OfficeController.getResult);
+
+// vote endpoint
+
+router.post('/votes', VoteController.voteCandidate);
 
 
 export default router;
