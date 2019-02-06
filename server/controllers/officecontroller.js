@@ -94,6 +94,82 @@ const OfficeController = {
       });
     }
   },
+
+  /**
+   * @method registerUser
+   * @description registers a user running for an office
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} JSON API response
+   */
+  async registerUser(req, res) {
+    const findOneQuery = 'SELECT * FROM users WHERE id=$1';
+
+    const registerUserQuery = 'INSERT INTO candidates(office, party, candidate) VALUES($1, $2, $3) RETURNING id, office';
+    try {
+      const { rows } = await db.query(findOneQuery, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          error: 'user record not found',
+        });
+      }
+      const values = [
+        req.body.office,
+        req.body.party,
+        req.params.id,
+      ];
+      const response = await db.query(registerUserQuery, values);
+      return res.status(200).json({
+        status: 200,
+        data: [response.rows[0]],
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'enter the required field',
+      });
+    }
+  },
+
+  /**
+   * @method getResult
+   * @description Retrieves the result of a specific office
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  async getResult(req, res) {
+    const text = `SELECT
+    candidate,
+    COUNT (candidate)
+    FROM votes
+    GROUP BY candidate
+    RETURNING office, candidate, count`;
+
+    const value = [
+      req.body.office,
+    ];
+
+    try {
+      const { rows } = await db.query(text, value);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          error: 'office record not found',
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: rows[0],
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'enter valid office id',
+      });
+    }
+  },
 };
 
 export default OfficeController;
