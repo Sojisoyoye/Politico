@@ -14,9 +14,10 @@ const VoteController = {
      * @returns {object} Json api response
      */
   async voteCandidate(req, res) {
-    const text = 'INSERT INTO votes(office, candidate) VALUES($1, $2) RETURNING *';
+    const text = 'INSERT INTO votes(createdby, office, candidate) VALUES($1, $2, $3) RETURNING *';
 
     const values = [
+      req.user.id,
       req.body.office,
       req.body.candidate,
     ];
@@ -28,9 +29,9 @@ const VoteController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'sorry, you can not vote',
+      return res.status(500).json({
+        status: 500,
+        error: 'Server error, unable to vote',
       });
     }
   },

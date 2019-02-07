@@ -12,10 +12,25 @@ const validateOfficeId = [
     .withMessage('id must be integer from 1 upwards'),
 ];
 
+const validateResult = [
+  body('office')
+    .isInt({ min: 1 })
+    .withMessage('office must be an integer from 1 upwards'),
+];
+
+const validateRegister = [
+  body('office')
+    .isInt({ min: 1 })
+    .withMessage('office must be an integer'),
+  body('party')
+    .isInt({ min: 1 })
+    .withMessage('party must be an integer'),
+];
+
 const validateParty = [
   body('name')
-    .isAlpha()
-    .withMessage('party name must contain only letters'),
+    .isString()
+    .withMessage('party name must contain string'),
   body('hqAddress')
     .isString()
     .withMessage('party address must be string')
@@ -31,11 +46,11 @@ const validateParty = [
 
 const validateOffice = [
   body('type')
-    .isAlpha()
-    .withMessage('type must contain only letters'),
+    .isString()
+    .withMessage('type must be a string'),
   body('name')
-    .isAlpha()
-    .withMessage('name must contain only letters'),
+    .isString()
+    .withMessage('name must be a string'),
 ];
 
 const validateNameUpdate = [
@@ -46,19 +61,60 @@ const validateNameUpdate = [
     .isAlpha()
     .withMessage('only name can be updated'),
   body('name')
-    .isAlpha()
-    .withMessage('name must contain only letters'),
+    .isString()
+    .withMessage('name must contain a string'),
+];
+
+const validateSignup = [
+  body('firstname')
+    .isString()
+    .withMessage('firstname must be a string')
+    .isLength({ min: 2 }),
+  body('lastname')
+    .isString()
+    .withMessage('lastname must be a string')
+    .isLength({ min: 2 }),
+  body('othername')
+    .isString()
+    .withMessage('othername must be a string')
+    .isLength({ min: 2 }),
+  body('email')
+    .isEmail()
+    .withMessage('email must be in the required format'),
+  body('phonenumber')
+    .isInt()
+    .withMessage('phone number must be a number'),
+  body('passporturl')
+    .isAlphanumeric()
+    .withMessage('passporturl must contain combination of letters and numbers'),
+];
+
+const validateLogin = [
+  body('email')
+    .isEmail()
+    .withMessage('email must be in the required format'),
+];
+
+const validateVote = [
+  body('id')
+    .isInt({ min: 1 })
+    .withMessage('id must be integer from 1 upwards'),
+  body('office')
+    .isInt({ min: 1 })
+    .withMessage('office must be integer from 1 upwards'),
+  body('candidate')
+    .isInt({ min: 1 })
+    .withMessage('candidate must be integer from 1 upwards'),
 ];
 
 const validationHandler = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(422).json({
-      error: errors.array().map(error => error.msg),
+    return res.status(422).json({
+      error: errors.array()[0],
     });
-  } else {
-    next();
   }
+  return next();
 };
 
 const validations = {
@@ -68,6 +124,11 @@ const validations = {
   validateOffice,
   validateNameUpdate,
   validationHandler,
+  validateSignup,
+  validateLogin,
+  validateVote,
+  validateResult,
+  validateRegister,
 };
 
 export default validations;

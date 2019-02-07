@@ -6,7 +6,6 @@ dotenv.config();
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 pool.on('connect', () => {
-  console.log('Database connected');
 });
 
 
@@ -15,20 +14,18 @@ pool.on('connect', () => {
  */
 const createPartyTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
-    parties(
-        id SERIAL PRIMARY KEY NOT NULL,
-        name VARCHAR(128) NOT NULL,
-        hqAddress VARCHAR(128) NOT NULL,
-        logoUrl VARCHAR(25) NOT NULL
-    )`;
+  parties(
+      id SERIAL PRIMARY KEY NOT NULL,
+      name VARCHAR(128) UNIQUE NOT NULL,
+      hqAddress VARCHAR(128) NOT NULL,
+      logoUrl VARCHAR(25) NOT NULL
+  )`;
 
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };
@@ -38,19 +35,17 @@ const createPartyTable = () => {
  */
 const createOfficeTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
-    offices(
-        id SERIAL PRIMARY KEY NOT NULL,
-        type VARCHAR(128) NOT NULL,
-        name VARCHAR(128) NOT NULL
-    )`;
+  offices(
+      id SERIAL PRIMARY KEY NOT NULL,
+      type VARCHAR(128) NOT NULL,
+      name VARCHAR(128) UNIQUE NOT NULL
+  )`;
 
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };
@@ -73,12 +68,10 @@ const createUserTable = () => {
   )`;
 
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };
@@ -88,20 +81,19 @@ const createUserTable = () => {
  */
 const createCandidateTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
-candidates(
-  id SERIAL PRIMARY KEY NOT NULL,
-  office INTEGER REFERENCES offices(id),
-  party INTEGER REFERENCES parties(id),
-  candidate INTEGER REFERENCES users(id)
-)`;
+  candidates(
+    id SERIAL NOT NULL,
+    office INTEGER REFERENCES offices(id),
+    party INTEGER REFERENCES parties(id),
+    candidate INTEGER UNIQUE REFERENCES users(id),
+  PRIMARY KEY(office, candidate)
+  )`;
 
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };
@@ -112,16 +104,16 @@ candidates(
 const createVoteTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
   votes(
-    id SERIAL PRIMARY KEY NOT NULL,
+    id SERIAL NOT NULL,
     createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
     createdBy INTEGER REFERENCES users(id),
     office INTEGER REFERENCES offices(id),
-    candidate INTEGER REFERENCES candidates(id)
+    candidate INTEGER REFERENCES candidates(candidate),
+PRIMARY KEY(createdBy, office)
   )`;
 
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
     .catch((err) => {
@@ -136,12 +128,10 @@ const createVoteTable = () => {
 const dropPartyTable = () => {
   const queryText = 'DROP TABLE IF EXISTS parties RETURNING *';
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };
@@ -152,12 +142,10 @@ const dropPartyTable = () => {
 const dropOfficeTable = () => {
   const queryText = 'DROP TABLE IF EXISTS offices RETURNING *';
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };
@@ -169,12 +157,10 @@ const dropOfficeTable = () => {
 const dropUserTable = () => {
   const queryText = 'DROP TABLE IF EXISTS users RETURNING *';
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };
@@ -185,12 +171,10 @@ const dropUserTable = () => {
 const dropCandidateTable = () => {
   const queryText = 'DROP TABLE IF EXISTS candidates RETURNING *';
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };
@@ -201,12 +185,10 @@ const dropCandidateTable = () => {
 const dropVoteTable = () => {
   const queryText = 'DROP TABLE IF EXISTS votes RETURNING *';
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };
@@ -234,7 +216,6 @@ const dropAllTables = () => {
 };
 
 pool.on('remove', () => {
-  console.log('client removed');
   process.exit(0);
 });
 

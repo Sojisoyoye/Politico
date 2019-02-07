@@ -31,9 +31,9 @@ const PartyController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'enter required credentials',
+      return res.status(500).json({
+        status: 500,
+        error: 'server error, unable to create party',
       });
     }
   },
@@ -55,9 +55,9 @@ const PartyController = {
         data: rows,
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'can not retrieve parties record',
+      return res.status(500).json({
+        status: 500,
+        error: 'server error, unable to get parties',
       });
     }
   },
@@ -84,9 +84,9 @@ const PartyController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'can not retreive party record',
+      return res.status(500).json({
+        status: 500,
+        error: 'Server error, can not retreive party record',
       });
     }
   },
@@ -121,9 +121,9 @@ const PartyController = {
         data: [response.rows[0]],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'name can not be updated',
+      return res.status(500).json({
+        status: 500,
+        error: 'Server error, name can not be updated',
       });
     }
   },
@@ -151,9 +151,9 @@ const PartyController = {
         data: [{ message: 'party deleted successfully' }],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'party not deleted',
+      return res.status(500).json({
+        status: 500,
+        error: 'Server error, party not deleted',
       });
     }
   },
