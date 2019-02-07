@@ -29,9 +29,9 @@ const VoteController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Server error, unable to vote',
+      return res.status(400).json({
+        status: 400,
+        error: 'unable to vote',
       });
     }
   },

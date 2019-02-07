@@ -36,9 +36,9 @@ const OfficeController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Server error, can not create office',
+      return res.status(400).json({
+        status: 400,
+        error: 'office already created',
       });
     }
   },
@@ -125,9 +125,9 @@ const OfficeController = {
         data: [response.rows[0]],
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Server error, can not register a user',
+      return res.status(400).json({
+        status: 400,
+        error: 'candidate already registered',
       });
     }
   },
@@ -159,9 +159,9 @@ const OfficeController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Server error, can not get office result',
+      return res.status(400).json({
+        status: 400,
+        error: 'can not get office result',
       });
     }
   },

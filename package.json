@@ -4,7 +4,8 @@
   "description": "A platform for both the politicians and citizens, which enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.",
   "main": "app.js",
   "scripts": {
-    "start": "node_modules/.bin/nodemon ./server/app.js --exec babel-node",
+    "start": "babel-node ./server/app.js",
+    "dev": "node_modules/.bin/nodemon ./server/app.js --exec babel-node",
     "test": "nyc --reporter=html --reporter=text mocha --require babel-register ./server/test --recursive --runInBand --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },

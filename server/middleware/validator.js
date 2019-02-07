@@ -39,9 +39,6 @@ const validateParty = [
   body('logoUrl')
     .isURL()
     .withMessage('logoURl must be a URL'),
-  body('acroymn')
-    .isAlpha()
-    .withMessage('acroymn must contain only letters'),
 ];
 
 const validateOffice = [
@@ -57,9 +54,6 @@ const validateNameUpdate = [
   param('id')
     .isInt({ min: 1 })
     .withMessage('id must be integer from 1 upwards'),
-  param('name')
-    .isAlpha()
-    .withMessage('only name can be updated'),
   body('name')
     .isString()
     .withMessage('name must contain a string'),
@@ -96,9 +90,6 @@ const validateLogin = [
 ];
 
 const validateVote = [
-  body('id')
-    .isInt({ min: 1 })
-    .withMessage('id must be integer from 1 upwards'),
   body('office')
     .isInt({ min: 1 })
     .withMessage('office must be integer from 1 upwards'),

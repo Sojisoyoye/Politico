@@ -116,8 +116,7 @@ PRIMARY KEY(createdBy, office)
     .then(() => {
       pool.end();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
     });
 };

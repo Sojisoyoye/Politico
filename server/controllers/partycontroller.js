@@ -31,9 +31,9 @@ const PartyController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'server error, unable to create party',
+      return res.status(400).json({
+        status: 400,
+        error: 'can not create, party with this name already created',
       });
     }
   },
@@ -121,9 +121,9 @@ const PartyController = {
         data: [response.rows[0]],
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Server error, name can not be updated',
+      return res.status(400).json({
+        status: 400,
+        error: 'name can not be updated',
       });
     }
   },
