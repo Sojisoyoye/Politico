@@ -47,8 +47,8 @@ const Helper = {
    * @param {string} paylaod
    * @returns {string} token
    */
-  genrateToken(id) {
-    const token = jwt.sign({ userId: id }, process.env.SECRET, { expiresIn: '7d' });
+  genrateToken(id, isadmin) {
+    const token = jwt.sign({ userId: id, isAdmin: isadmin }, process.env.SECRET, { expiresIn: '7d' });
     return token;
   },
 };

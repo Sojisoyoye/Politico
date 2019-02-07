@@ -36,9 +36,9 @@ const OfficeController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'can not create office',
+      return res.status(500).json({
+        status: 500,
+        error: 'Server error, can not create office',
       });
     }
   },
@@ -59,9 +59,9 @@ const OfficeController = {
         data: rows,
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'can not retrieve offices record',
+      return res.status(500).json({
+        status: 500,
+        error: 'Server error, can not retrieve offices record',
       });
     }
   },
@@ -88,9 +88,9 @@ const OfficeController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'can not retreive office record',
+      return res.status(500).json({
+        status: 500,
+        error: 'Server error, can not retreive office record',
       });
     }
   },
@@ -125,9 +125,9 @@ const OfficeController = {
         data: [response.rows[0]],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'enter the required field',
+      return res.status(500).json({
+        status: 500,
+        error: 'Server error, can not register a user',
       });
     }
   },
@@ -140,16 +140,11 @@ const OfficeController = {
    * @returns {object} JSON API Response
    */
   async getResult(req, res) {
-    const text = `SELECT
-    candidate,
-    COUNT (candidate)
-    FROM votes
-    GROUP BY candidate
-    RETURNING office, candidate, count`;
+    const office = parseInt(req.params.id, 10);
 
-    const value = [
-      req.body.office,
-    ];
+    const text = 'SELECT office, candidate, COUNT (candidate) FROM votes WHERE office = $1 GROUP BY candidate, office';
+
+    const value = [office];
 
     try {
       const { rows } = await db.query(text, value);
@@ -164,9 +159,9 @@ const OfficeController = {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'enter valid office id',
+      return res.status(500).json({
+        status: 500,
+        error: 'Server error, can not get office result',
       });
     }
   },

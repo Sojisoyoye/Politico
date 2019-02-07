@@ -28,7 +28,7 @@ const UserController = {
     try {
       const { rows } = await db.query(createQuery, values);
 
-      const token = Helper.genrateToken(rows[0].id);
+      const token = Helper.genrateToken(rows[0].id, rows[0].isadmin);
       return res.status(201).json({
         status: 201,
         data: [{
@@ -40,12 +40,12 @@ const UserController = {
       if (error.routine === '_bt_check_unique') {
         return res.status(400).json({
           status: 400,
-          message: 'user with email already exist',
+          error,
         });
       }
-      return res.status(400).json({
-        status: 400,
-        error,
+      return res.status(500).json({
+        status: 500,
+        error: 'server error, can not sign up',
       });
     }
   },
@@ -67,7 +67,7 @@ const UserController = {
       if (!Helper.comparePassword(rows[0].password, password)) {
         return res.status(400).json({ message: 'password incorrect' });
       }
-      const token = Helper.genrateToken(rows[0].id);
+      const token = Helper.genrateToken(rows[0].id, rows[0].isadmin);
       return res.status(200).json({
         status: 200,
         data: [{
@@ -85,9 +85,9 @@ const UserController = {
         }],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error,
+      return res.status(500).json({
+        status: 500,
+        error: 'server error, can not log in user',
       });
     }
   },
