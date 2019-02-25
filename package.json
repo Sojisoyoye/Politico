@@ -5,8 +5,11 @@
   "main": "app.js",
   "scripts": {
     "start": "babel-node ./server/app.js",
-    "dev": "node_modules/.bin/nodemon ./server/app.js --exec babel-node",
-    "test": "nyc --reporter=html --reporter=text mocha --require babel-register ./server/test --recursive --runInBand --exit",
+    "migrations": "babel-node ./server/models/migration.js --env",
+    "migration:drop": "babel-node ./server/models/migrationDrop.js --env",
+    "dev": "node_modules/.bin/nodemon ./server/app.js --exec babel-node --env",
+    "pretest": "cross-env NODE_ENV=test npm run migration:drop --env",
+    "test": "cross-env NODE_ENV=test npm run migrations && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require babel-register ./server/test --recursive --runInBand --timeout 10000 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -38,10 +41,11 @@
     "babel-preset-env": "^1.7.0",
     "chai-http": "^4.2.1",
     "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.15.0",
     "nodemon": "^1.18.9",
-    "nyc": "^13.1.0"
+    "nyc": "^13.3.0"
   }
 }

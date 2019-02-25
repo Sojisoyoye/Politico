@@ -7,7 +7,7 @@ const Helper = {
      * @param {string} password
      * @returns {string} returns hashed password
      */
-  hashPadssword(password) {
+  hashPassword(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
   },
 
@@ -19,27 +19,6 @@ const Helper = {
    */
   comparePassword(hashPadssword, password) {
     return bcrypt.compareSync(password, hashPadssword);
-  },
-
-  /**
-   * Email helper method
-   * @param {*} email
-   */
-
-  validEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  },
-
-  validPhoneNo(phoneNumber) {
-    return /^\+[0-9]{13}$|^[0-9]{11}$/.test(phoneNumber);
-  },
-
-  validName(name) {
-    return /^[a-zA-Z]+$/.test(name);
-  },
-
-  validPassportUrl(passportUrl) {
-    return /^([0-9]|[A-z])+$/.test(passportUrl);
   },
 
   /**

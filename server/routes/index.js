@@ -13,24 +13,27 @@ dotenv.config();
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Welcome to Politico API version1' });
+  res.status(200).json({ message: 'Welcome to Politico API version 1' });
 });
 
+// Parties endpoints
 router.post('/parties', validations.validateParty, validations.validationHandler, Authenticate.verifyAdmin, PartyController.postParty);
 
-router.get('/parties', PartyController.getParties);
+router.get('/parties', Authenticate.verifyToken, PartyController.getParties);
 
-router.get('/parties/:id', PartyController.getAParty);
+router.get('/parties/:id', Authenticate.verifyToken, PartyController.getAParty);
 
 router.patch('/parties/:id/name', validations.validateNameUpdate, validations.validationHandler, Authenticate.verifyAdmin, PartyController.updateName);
 
 router.delete('/parties/:id', validations.validatePartyId, validations.validationHandler, Authenticate.verifyAdmin, PartyController.deleteParty);
 
+// Offices endpoints
+
 router.post('/offices', validations.validateOffice, validations.validationHandler, Authenticate.verifyAdmin, OfficeController.postOffice);
 
-router.get('/offices', OfficeController.getOffices);
+router.get('/offices', Authenticate.verifyToken, OfficeController.getOffices);
 
-router.get('/offices/:id', OfficeController.getAOffice);
+router.get('/offices/:id', Authenticate.verifyToken, OfficeController.getAOffice);
 
 // Sign up and log in
 
@@ -42,7 +45,7 @@ router.post('/auth/login', validations.validateLogin, validations.validationHand
 
 router.post('/office/:id/register', validations.validateOfficeId, validations.validateRegister, validations.validationHandler, Authenticate.verifyAdmin, OfficeController.registerUser);
 
-router.post('/office/:id/result', validations.validateOfficeId, validations.validateResult, validations.validationHandler, OfficeController.getResult);
+router.post('/office/:id/result', validations.validateOfficeId, validations.validateResult, validations.validationHandler, Authenticate.verifyToken, OfficeController.getResult);
 
 // vote endpoint
 
