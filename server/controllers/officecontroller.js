@@ -1,4 +1,4 @@
-import db from '../models/index';
+import pool from '../models/connect';
 
 /**
  * OfficeController
@@ -24,21 +24,21 @@ const OfficeController = {
     ];
 
     try {
-      const { rows } = await db.query(text, values);
-      if (!req.body.name) {
-        return res.status(400).json({
-          status: 400,
-          error: 'name must be entered',
-        });
-      }
+      const { rows } = await pool.query(text, values);
       return res.status(201).json({
-        status: 200,
+        status: 201,
         data: rows[0],
       });
     } catch (error) {
+      if (error.constraint === 'offices_name_key') {
+        return res.status(406).json({
+          status: 406,
+          error: 'office name already exist',
+        });
+      }
       return res.status(400).json({
         status: 400,
-        error: 'office already created',
+        error,
       });
     }
   },
@@ -53,15 +53,15 @@ const OfficeController = {
   async getOffices(req, res) {
     const findAllQuery = 'SELECT * FROM offices';
     try {
-      const { rows } = await db.query(findAllQuery);
+      const { rows } = await pool.query(findAllQuery);
       return res.status(200).json({
         status: 200,
         data: rows,
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Server error, can not retrieve offices record',
+      return res.status(400).json({
+        status: 400,
+        error,
       });
     }
   },
@@ -76,21 +76,23 @@ const OfficeController = {
   async getAOffice(req, res) {
     const text = 'SELECT * FROM offices WHERE id = $1';
     try {
-      const { rows } = await db.query(text, [req.params.id]);
+      const { rows } = await pool.query(text, [req.params.id]);
+      if (rows[0]) {
+        res.status(200).json({
+          status: 200,
+          data: rows[0],
+        });
+      }
       if (!rows[0]) {
-        return res.status(404).json({
+        res.status(404).json({
           status: 404,
           error: 'office record not found',
         });
       }
-      return res.status(200).json({
-        status: 200,
-        data: rows[0],
-      });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Server error, can not retreive office record',
+      res.status(400).json({
+        status: 400,
+        error,
       });
     }
   },
@@ -107,27 +109,45 @@ const OfficeController = {
 
     const registerUserQuery = 'INSERT INTO candidates(office, party, candidate) VALUES($1, $2, $3) RETURNING id, office';
     try {
-      const { rows } = await db.query(findOneQuery, [req.params.id]);
-      if (!rows[0]) {
-        return res.status(404).json({
-          status: 404,
-          error: 'user record not found',
-        });
-      }
+      await pool.query(findOneQuery, [req.params.id]);
       const values = [
         req.body.office,
         req.body.party,
         req.params.id,
       ];
-      const response = await db.query(registerUserQuery, values);
+      const response = await pool.query(registerUserQuery, values);
       return res.status(200).json({
         status: 200,
-        data: [response.rows[0]],
+        data: response.rows[0],
       });
     } catch (error) {
+      if (error.constraint === 'candidates_candidate_fkey') {
+        return res.status(404).json({
+          status: 404,
+          error: 'user can not be found',
+        });
+      }
+      if (error.constraint === 'candidates_office_fkey') {
+        return res.status(404).json({
+          status: 404,
+          error: 'office can not be found',
+        });
+      }
+      if (error.constraint === 'candidates_party_fkey') {
+        return res.status(404).json({
+          status: 404,
+          error: 'party can not be found',
+        });
+      }
+      if (error.constraint === 'candidates_pkey') {
+        return res.status(406).json({
+          status: 406,
+          error: 'candidate already registered',
+        });
+      }
       return res.status(400).json({
         status: 400,
-        error: 'candidate already registered',
+        error,
       });
     }
   },
@@ -147,21 +167,23 @@ const OfficeController = {
     const value = [office];
 
     try {
-      const { rows } = await db.query(text, value);
-      if (!rows[0]) {
-        return res.status(404).json({
-          status: 404,
-          error: 'office record not found',
+      const { rows } = await pool.query(text, value);
+      if (rows[0]) {
+        res.status(200).json({
+          status: 200,
+          data: rows[0],
         });
       }
-      return res.status(200).json({
-        status: 200,
-        data: rows[0],
-      });
+      if (!rows[0]) {
+        res.status(404).json({
+          status: 404,
+          error: 'no votes for this office',
+        });
+      }
     } catch (error) {
-      return res.status(400).json({
+      res.status(400).json({
         status: 400,
-        error: 'can not get office result',
+        error,
       });
     }
   },

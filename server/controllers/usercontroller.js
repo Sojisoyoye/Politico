@@ -1,4 +1,4 @@
-import db from '../models/index';
+import pool from '../models/connect';
 import Helper from '../helpers/helperutils';
 
 const UserController = {
@@ -9,7 +9,7 @@ const UserController = {
      * @returns {object} Json api response
      */
   async createUser(req, res) {
-    const hashPassword = Helper.hashPadssword(req.body.password);
+    const hashPassword = Helper.hashPassword(req.body.password);
 
     const createQuery = `INSERT INTO
     users(firstname, lastname, othername, email, password, phonenumber, passporturl)
@@ -26,7 +26,7 @@ const UserController = {
     ];
 
     try {
-      const { rows } = await db.query(createQuery, values);
+      const { rows } = await pool.query(createQuery, values);
 
       const token = Helper.genrateToken(rows[0].id, rows[0].isadmin);
       return res.status(201).json({
@@ -37,15 +37,15 @@ const UserController = {
         }],
       });
     } catch (error) {
-      if (error.routine === '_bt_check_unique') {
-        return res.status(400).json({
-          status: 400,
-          error,
+      if (error.constraint === 'users_email_key') {
+        return res.status(406).json({
+          status: 406,
+          error: 'user with this email already exist',
         });
       }
-      return res.status(500).json({
-        status: 500,
-        error: 'server error, can not sign up',
+      return res.status(400).json({
+        status: 400,
+        error,
       });
     }
   },
@@ -60,12 +60,12 @@ const UserController = {
     const { email, password } = req.body;
     const text = 'SELECT * FROM users WHERE email = $1';
     try {
-      const { rows } = await db.query(text, [email]);
+      const { rows } = await pool.query(text, [email]);
       if (!rows[0]) {
-        return res.status(400).json({ message: 'The credentials are incorrect' });
+        return res.status(404).json({ message: 'user with this details can not be found' });
       }
       if (!Helper.comparePassword(rows[0].password, password)) {
-        return res.status(400).json({ message: 'password incorrect' });
+        return res.status(401).json({ message: 'wrong password, try again' });
       }
       const token = Helper.genrateToken(rows[0].id, rows[0].isadmin);
       return res.status(200).json({
@@ -85,9 +85,9 @@ const UserController = {
         }],
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'server error, can not log in user',
+      return res.status(400).json({
+        status: 400,
+        error,
       });
     }
   },

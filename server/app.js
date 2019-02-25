@@ -4,8 +4,11 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import router from './routes';
+// import { setUpTables } from './models/connection';
 
 dotenv.config();
+
+// setUpTables();
 const app = express();
 app.use(express.json());
 

@@ -3,4 +3,20 @@ language: node_js
 node_js:
   - "node"
 
+directories:
+  - node_modules
+
+env:
+  - NODE_ENV=test
+
+services:
+  - postgresql
+
+befor_script:
+  - psql -c 'create database politicotest;' -U postgres
+  - psql -c "CREATE USER omoba WITH PASSWORD 'password';" -U postgres
+
+script:
+  npm test
+
 after_success: npm run coverage

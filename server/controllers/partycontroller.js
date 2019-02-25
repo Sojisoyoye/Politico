@@ -1,4 +1,4 @@
-import db from '../models/index';
+import pool from '../models/connect';
 
 /**
  * PartyController
@@ -25,15 +25,21 @@ const PartyController = {
     ];
 
     try {
-      const { rows } = await db.query(text, values);
+      const { rows } = await pool.query(text, values);
       return res.status(201).json({
-        status: 200,
+        status: 201,
         data: rows[0],
       });
     } catch (error) {
+      if (error.constraint === 'parties_name_key') {
+        return res.status(406).json({
+          status: 406,
+          error: 'party name already exist',
+        });
+      }
       return res.status(400).json({
         status: 400,
-        error: 'can not create, party with this name already created',
+        error,
       });
     }
   },
@@ -49,15 +55,15 @@ const PartyController = {
   async getParties(req, res) {
     const findAllQuery = 'SELECT * FROM parties';
     try {
-      const { rows } = await db.query(findAllQuery);
+      const { rows } = await pool.query(findAllQuery);
       return res.status(200).json({
         status: 200,
         data: rows,
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'server error, unable to get parties',
+      return res.status(400).json({
+        status: 400,
+        error,
       });
     }
   },
@@ -72,21 +78,23 @@ const PartyController = {
   async getAParty(req, res) {
     const text = 'SELECT * FROM parties WHERE id = $1';
     try {
-      const { rows } = await db.query(text, [req.params.id]);
+      const { rows } = await pool.query(text, [req.params.id]);
+      if (rows[0]) {
+        res.status(200).json({
+          status: 200,
+          data: rows[0],
+        });
+      }
       if (!rows[0]) {
-        return res.status(404).json({
+        res.status(404).json({
           status: 404,
           error: 'party record not found',
         });
       }
-      return res.status(200).json({
-        status: 200,
-        data: rows[0],
-      });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Server error, can not retreive party record',
+      res.status(400).json({
+        status: 400,
+        error,
       });
     }
   },
@@ -104,26 +112,34 @@ const PartyController = {
     const updateOneQuery = `UPDATE parties 
     SET name=$1 WHERE id=$2 returning id, name`;
     try {
-      const { rows } = await db.query(findOneQuery, [req.params.id]);
-      if (!rows[0]) {
-        return res.status(404).json({
-          status: 404,
-          error: 'party record not found',
+      const { rows } = await pool.query(findOneQuery, [req.params.id]);
+      if (rows[0]) {
+        const value = [
+          req.body.name || rows[0].name,
+          req.params.id,
+        ];
+        const response = await pool.query(updateOneQuery, value);
+        res.status(200).json({
+          status: 200,
+          data: [response.rows[0]],
         });
       }
-      const value = [
-        req.body.name || rows[0].name,
-        req.params.id,
-      ];
-      const response = await db.query(updateOneQuery, value);
-      return res.status(200).json({
-        status: 200,
-        data: [response.rows[0]],
-      });
+      if (!rows[0]) {
+        res.status(404).json({
+          status: 404,
+          error: 'party not found',
+        });
+      }
     } catch (error) {
-      return res.status(400).json({
+      if (error.constraint === 'parties_name_key') {
+        res.status(406).json({
+          status: 406,
+          error: 'name already exist',
+        });
+      }
+      res.status(400).json({
         status: 400,
-        error: 'name can not be updated',
+        error,
       });
     }
   },
@@ -139,21 +155,23 @@ const PartyController = {
   async deleteParty(req, res) {
     const deleteQuery = 'DELETE FROM parties WHERE id=$1 returning *';
     try {
-      const { rows } = await db.query(deleteQuery, [req.params.id]);
+      const { rows } = await pool.query(deleteQuery, [req.params.id]);
+      if (rows[0]) {
+        res.status(200).json({
+          status: 200,
+          data: [{ message: 'party deleted successfully' }],
+        });
+      }
       if (!rows[0]) {
-        return res.status(404).json({
+        res.status(404).json({
           status: 404,
           error: 'party record not found',
         });
       }
-      return res.status(200).json({
-        status: 200,
-        data: [{ message: 'party deleted successfully' }],
-      });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Server error, party not deleted',
+      res.status(400).json({
+        status: 400,
+        error,
       });
     }
   },
