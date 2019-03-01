@@ -104,7 +104,7 @@ const validateSignup = [
     .isEmpty()
     .withMessage('please provide a firstname'),
   body('firstname')
-    .custom(firstname => /^[a-zA-Z]+$/.test(firstname))
+    .custom(firstname => /^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(firstname))
     .withMessage('please provide a valid firstname')
     .isLength({ min: 2 })
     .withMessage('firstname must be more than two characters'),
@@ -113,10 +113,14 @@ const validateSignup = [
     .isEmpty()
     .withMessage('please provide a lastname'),
   body('lastname')
-    .custom(lastname => /^[a-zA-Z]+$/.test(lastname))
+    .custom(lastname => /^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(lastname))
     .withMessage('please provide a valid lastname')
     .isLength({ min: 2 })
     .withMessage('lastname must be more than two characters'),
+  check('othername')
+    .optional()
+    .isString()
+    .withMessage('please provide a valid othername'),
   check('email')
     .not()
     .isEmpty()
@@ -139,7 +143,7 @@ const validateSignup = [
   body('phonenumber')
     .isInt()
     .withMessage('please provide a valid phone number')
-    .isLength({ min: 6, max: 14 })
+    .isLength({ min: 6, max: 13 })
     .withMessage('phone number must be at least 6 numbers and at most 14 numbers'),
   check('passporturl')
     .optional(),

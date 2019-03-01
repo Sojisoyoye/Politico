@@ -77,6 +77,20 @@ describe('OFFICES', () => {
         });
     });
 
+    it('should return error if specific political office can not be found', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/offices/10')
+        .set('authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.be.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.error).to.equal('office record not found');
+          done(err);
+        });
+    });
+
     it('should get result of a specific political office', (done) => {
       chai
         .request(app)
@@ -87,6 +101,21 @@ describe('OFFICES', () => {
           expect(res).to.have.status(200);
           expect(res.body.status).to.equal(200);
           expect(res.body).to.be.an('object');
+          done(err);
+        });
+    });
+
+    it('should return error if specific office result can not be found', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/office/10/result')
+        .set('authorization', `Bearer ${userToken}`)
+        .send({ office: 10 })
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.be.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.error).to.equal('no votes for this office');
           done(err);
         });
     });

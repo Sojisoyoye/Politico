@@ -38,6 +38,22 @@ describe('PARTIES', () => {
           done(err);
         });
     });
+
+    it('should return an error if no authorization token was specified', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/parties')
+        .set('authorization', 'undefined')
+        .send({
+          name: 'new life nigeria party',
+          hqAddress: 'ilupeju road',
+          logoUrl: 'www.nlnp.com',
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          done(err);
+        });
+    });
   });
 
   describe('/GET political party', () => {
@@ -77,6 +93,20 @@ describe('PARTIES', () => {
           done(err);
         });
     });
+
+    it('should return error if specific political party can not be found', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/parties/10')
+        .set('authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.be.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.error).to.equal('party record not found');
+          done(err);
+        });
+    });
   });
 
   describe('/PATCH a specific political party', () => {
@@ -103,6 +133,21 @@ describe('PARTIES', () => {
           done(err);
         });
     });
+
+    it('should return error if party to update can not be found', (done) => {
+      chai
+        .request(app)
+        .patch('/api/v1/parties/10/name')
+        .set('authorization', `Bearer ${adminToken}`)
+        .send({ name: 'New Life Party' })
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.be.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.error).to.equal('party not found');
+          done(err);
+        });
+    });
   });
 
   describe('/DELETE a specific political party', () => {
@@ -125,6 +170,20 @@ describe('PARTIES', () => {
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body.status).to.equal(200);
+          done(err);
+        });
+    });
+
+    it('should return error if specific political party can not be found', (done) => {
+      chai
+        .request(app)
+        .delete('/api/v1/parties/10')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.status).to.be.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.error).to.equal('party record not found');
           done(err);
         });
     });
