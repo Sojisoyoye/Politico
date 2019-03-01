@@ -131,12 +131,12 @@ const PartyController = {
         });
       }
     } catch (error) {
-      if (error.constraint === 'parties_name_key') {
-        res.status(406).json({
-          status: 406,
-          error: 'name already exist',
-        });
-      }
+      // if (error.constraint === 'parties_name_key') {
+      // res.status(406).json({
+      // status: 406,
+      // error: 'name already exist',
+      // });
+      // }
       res.status(400).json({
         status: 400,
         error,

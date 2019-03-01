@@ -17,12 +17,6 @@ const Authenticate = {
       return;
     }
     const token = req.headers.authorization.split(' ')[1];
-    // if (!token) {
-    // res.status(400).json({
-    // status: 400,
-    // error: 'Token is not provided',
-    // });
-    // }
     try {
       const decoded = await jwt.verify(token, process.env.SECRET);
       const text = 'SELECT * FROM users WHERE id = $1';

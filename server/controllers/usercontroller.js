@@ -1,5 +1,7 @@
 import pool from '../models/connect';
 import Helper from '../helpers/helperutils';
+// import imgUpload from '../middleware/multer';
+// import { uploader } from '../config/cloudinaryConfig';
 
 const UserController = {
   /**
@@ -10,6 +12,16 @@ const UserController = {
      */
   async createUser(req, res) {
     const hashPassword = Helper.hashPassword(req.body.password);
+
+    // const passportURl = () => {
+    // if (req.file) {
+    // const file = imgUpload.dataUri(req).content;
+    // uploader.upload(file).then((result) => {
+    // const passportUrl = result.url;
+    // return passportUrl;
+    // });
+    // }
+    // };
 
     const createQuery = `INSERT INTO
     users(firstname, lastname, othername, email, password, phonenumber, passporturl)
@@ -22,7 +34,7 @@ const UserController = {
       req.body.email,
       hashPassword,
       req.body.phonenumber,
-      req.body.passporturl,
+      req.file,
     ];
 
     try {
@@ -40,7 +52,7 @@ const UserController = {
       if (error.constraint === 'users_email_key') {
         return res.status(406).json({
           status: 406,
-          error: 'user with this email already exist',
+          message: 'user with this email already exist',
         });
       }
       return res.status(400).json({
