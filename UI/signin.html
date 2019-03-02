@@ -28,7 +28,7 @@
 
                     <div class="SigninTabContainer SigninTabContainer--basic">
                         <div class="SigninTabContainer__form">
-                            <form class="app_signup_signup_sheet_signup_form" action="adminpage.html">
+                            <form id="sign_in_form" class="app_signup_signup_sheet_signup_form" method="POST">
 
 
                                 <div class="app_signup_text_input_outer">
@@ -36,8 +36,8 @@
                                         <div class="app_signup_text_input_label_text">
                                             <span>Email</span>
                                         </div>
-                                        <input type="email" name="email" class="app_signin_text_input_input" required>
-                                        <div class="app_signup_text_input_error_message">
+                                        <input type="email" id="email" name="email" class="app_signin_text_input_input" required>
+                                        <div id="email_error" class="e-err" class="app_signup_text_input_error_message">
 
                                         </div>
                                     </label>
@@ -49,14 +49,14 @@
                                             <div class="app_signup_text_input_label_text">
                                                 <span>Password</span>
                                             </div>
-                                            <input type="password" name="password" class="app_signin_text_input_input" required>
-                                            <div class="app_signup_text_input_error_message">
+                                            <input type="password" id="password" name="password" class="app_signin_text_input_input" required>
+                                            <div id="password_error" class="app_signup_text_input_error_message">
     
                                             </div>
                                         </label>
                                     </div>
 
-                                    <button>Sign In</button>
+                                    <button id="sign_in_btn">Sign In</button>
 
                                     <div class="app_signin_forgot_password">
                                         <a href="password.html">Forgot Password?</a>
@@ -84,3 +84,8 @@
     </div>
 </div>
 </body>
+<script src="/UI/js/signin.js"></script>
+<!--<script>document.getElementById('sign_in_btn').addEventListener('submit', () => {
+    document.getElementsByClassName('e-err').innerHTML = '';
+  });</script> -->
+</html>

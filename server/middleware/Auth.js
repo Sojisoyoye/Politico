@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import db from '../models/index';
 
 const Authenticate = {
   /**
@@ -10,21 +9,18 @@ const Authenticate = {
      * @returns {object|void} response object
 */
   async verifyToken(req, res, next) {
-    // const token = req.headers['x-access-token'];
     const authHeader = req.headers.authorization;
     if (typeof authHeader === 'undefined') {
       res.status(401).json({ error: 'Unathorized - Header not set' });
       return;
     }
-    const token = req.headers.authorization.split(' ')[1];
+    const token = authHeader.split(' ')[1];
     try {
       const decoded = await jwt.verify(token, process.env.SECRET);
-      const text = 'SELECT * FROM users WHERE id = $1';
-      const { rows } = await db.query(text, [decoded.userId]);
-      if (!rows[0]) {
+      if (!decoded.userId) {
         res.status(400).json({
           status: 400,
-          error: 'The token provided is invalid',
+          error: 'Token is Invalid',
         });
       }
       req.user = { id: decoded.userId };
@@ -38,19 +34,12 @@ const Authenticate = {
   },
 
   async verifyAdmin(req, res, next) {
-    // const token = req.headers['x-access-token'];
     const authHeader = req.headers.authorization;
     if (typeof authHeader === 'undefined') {
       res.status(401).json({ error: 'Unathorised - Header not set' });
       return;
     }
     const token = authHeader.split(' ')[1];
-    // if (!token) {
-    // res.status(400).json({
-    // status: 400,
-    // error: 'Token is not provided',
-    // });
-    // }
     try {
       const decoded = await jwt.verify(token, process.env.SECRET);
       if (decoded.isAdmin === 'false') {

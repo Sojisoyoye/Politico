@@ -148,6 +148,14 @@ html, body {
   /* Registration Page */
 
 /* Signup */
+/* .e-err {
+  display: none;
+} */
+
+.party-logo {
+  width: 100px;
+}
+
 .app_signup_layout {
   padding: 0;
   margin: 0;

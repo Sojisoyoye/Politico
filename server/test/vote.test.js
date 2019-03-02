@@ -13,7 +13,7 @@ describe('VOTES', () => {
       chai
         .request(app)
         .post('/api/v1/auth/login')
-        .send({ email: 'foo@email.com', password: '123456' })
+        .send({ email: 'admin@email.com', password: '123456' })
         .end((err, res) => {
           userToken = res.body.data[0].token;
           done(err);

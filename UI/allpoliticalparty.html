@@ -59,7 +59,6 @@
                         <legend>Search for a Party</legend>
                         <input class= "search-input" type="text" placeholder="Enter party name">
                         <button>Search</button> 
-                         <!-- <input type="submit" value="Search"> -->
                 </fieldset>
               </form>
               </div>
@@ -71,61 +70,72 @@
               <table class="political__table">
                 <thead>
                   <tr>
-                    <th>Logo</th>
+                    <th>Id</th>
                     <th>Party Name</th>
-                    <th>Party Acroymn</th>
+                    <th>Party Address</th>
+                    <th>Logo</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="party_table_body">
                   <tr>
-                    <td><img src="img/Accord.jpg" style="width:100px" alt="accord"></td>
+                    <td>1</td>  
                     <td>Accord</td>
-                    <td>A</td>    
+                    <td>1, Ajah road, Lagos</td>
+                    <td><img src="img/Accord.jpg" class="party-logo" alt="accord"></td>  
                   </tr>
                   <tr>
-                    <td><img src="img/ActionAlliance.jpg" style="width:100px" alt="action alliance"></td>
+                    <td>2</td>
                     <td>Action Alliance</td>
-                    <td>AA</td>
+                    <td>2, Garki Road, Abuja</td>
+                    <td><img src="img/ActionAlliance.jpg" class="party-logo" alt="action alliance"></td> 
                   </tr>
                   <tr>
-                    <td><img src="img/AAC.png" style="width:100px" alt="African action congress"></td>
+                    <td>3</td>
                     <td>African Action Congress</td>
-                    <td>AAC</td>
+                    <td>3, Ajah road, Lagos</td>
+                    <td><img src="img/AAC.png" class="party-logo" alt="African action congress"></td>
                   </tr>
                   <tr>
-                    <td><img src="img/ad.png" style="width:100px" alt="Alliance for Democracy"></td>
+                    <td>4</td>
                     <td>Alliance for Democracy</td>
-                    <td>AD</td>
+                    <td>4, Garki road, Abuja</td>
+                    <td><img src="img/ad.png" class="party-logo" alt="Alliance for Democracy"></td>
                   </tr>
                   <tr>
-                    <td><img src="img/adc.jpg" style="width:100px" alt="african democratic congress"></td>
+                    <td>5</td>
                     <td>African Democratic Congress</td>
-                    <td>ADC</td>
+                    <td>2, Lekki-Epe Express Way, Lagos</td>
+                    <td><img src="img/adc.jpg" class="party-logo" alt="african democratic congress"></td>
                   </tr>
                   <tr>
-                    <td><img src="img/alliancepeopledemparty.jpg" style="width:100px" alt="apdp"></td>
+                    <td>6</td>
                     <td>Alliance People Democratic Party</td>
-                    <td>APDP</td>
+                    <td>5, Wuse Road Abuja</td>
+                    <td><img src="img/alliancepeopledemparty.jpg" class="party-logo" alt="apdp"></td>
                   </tr>
                   <tr>
-                    <td><img src="img/AlternativePN.png" style="width:100px" alt="apn"></td>
+                    <td>7</td>
                     <td>Alternative Party of Nigeria</td>
-                    <td>APN</td>
+                    <td>4, Akin Adesola Str., Victoria Island, Lagos</td>
+                    <td><img src="img/AlternativePN.png" class="party-logo" alt="apn"></td>
                   </tr>
                   <tr>
-                    <td><img src="img/actionpeoplesparty.jpeg" style="width:100px" alt="app"></td>
+                    <td>8</td>
                     <td>Action Peoples Party</td>
-                    <td>APP</td>
+                    <td>10, Wuse Road Abuja</td>
+                    <td><img src="img/actionpeoplesparty.jpeg" class="party-logo" alt="app"></td>
                   </tr>
                   <tr>
-                    <td><img src="img/ChangeAdvParty.jpg" style="width:100px" alt="cap"></td>
+                    <td>9</td>
                     <td>Change Advocacy Party</td>
-                    <td>CAP</td>
+                    <td>2, Akin Adesola Str., Victoria Island, Lagos</td>
+                    <td><img src="img/ChangeAdvParty.jpg" class="party-logo" alt="cap"></td>
                   </tr>
                   <tr>
-                    <td><img src="img/younddemparty.jpg" style="width:100px" alt="YDP"></td>
+                    <td>10</td>
                     <td>Young Democratic Party</td>
-                    <td>YDP</td>
+                    <td>15, Garki Road, Abuja</td>
+                    <td><img src="img/younddemparty.jpg" class="party-logo" alt="YDP"></td>
                   </tr>
                 </tbody>
               </table>
@@ -144,4 +154,5 @@
       </div>
     </div>    
 </body>
+<script src="/UI/js/allparties.js"></script>
 </html>

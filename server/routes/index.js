@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import express from 'express';
 import dotenv from 'dotenv';
-import imgUpload from '../middleware/multer';
+import parser from '../config/cloudinaryConfig';
 import PartyController from '../controllers/partycontroller';
 import OfficeController from '../controllers/officecontroller';
 import UserController from '../controllers/usercontroller';
@@ -17,8 +17,8 @@ router.get('/', (req, res) => {
   res.status(200).json({ message: 'Welcome to Politico API version 1' });
 });
 
-// router.post('/upload', multerUploads, (req, res) => {
-// console.log('req.file:', req.file);
+// router.post('/upload', parser.single('passport'), (req, res) => {
+// console.log('req.file:', req.file.url);
 // res.status(200).json({ message: 'upload successful' });
 // });
 
@@ -43,7 +43,7 @@ router.get('/offices/:id', Authenticate.verifyToken, OfficeController.getAOffice
 
 // Sign up and log in
 
-router.post('/auth/signup', validations.validateSignup, validations.validationHandler, imgUpload.multerUploads, UserController.createUser);
+router.post('/auth/signup', parser.single('passporturl'), validations.validateSignup, validations.validationHandler, UserController.createUser);
 
 router.post('/auth/login', validations.validateLogin, validations.validationHandler, UserController.loginUser);
 
