@@ -2,7 +2,6 @@ import 'babel-polyfill';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-// import path from 'path';
 import { urlencoded, json } from 'body-parser';
 import router from './routes';
 
@@ -16,9 +15,9 @@ const port = process.env.PORT || 3000;
 app.use(json());
 app.use(urlencoded({ extended: false }));
 
-// app.use(cloudinaryConfig);
 
 app.use(cors());
+
 app.use('/api/v1/', router);
 
 app.get('/', (req, res) => {

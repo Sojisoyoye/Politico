@@ -1,7 +1,5 @@
 import pool from '../models/connect';
 import Helper from '../helpers/helperutils';
-// import imgUpload from '../middleware/multer';
-// import { uploader } from '../config/cloudinaryConfig';
 
 const UserController = {
   /**
@@ -13,15 +11,9 @@ const UserController = {
   async createUser(req, res) {
     const hashPassword = Helper.hashPassword(req.body.password);
 
-    // const passportURl = () => {
-    // if (req.file) {
-    // const file = imgUpload.dataUri(req).content;
-    // uploader.upload(file).then((result) => {
-    // const passportUrl = result.url;
-    // return passportUrl;
-    // });
-    // }
-    // };
+    // parser.single('passporturl');
+    // console.log(req.file);
+
 
     const createQuery = `INSERT INTO
     users(firstname, lastname, othername, email, password, phonenumber, passporturl)
@@ -34,7 +26,7 @@ const UserController = {
       req.body.email,
       hashPassword,
       req.body.phonenumber,
-      req.file,
+      req.file.url,
     ];
 
     try {
@@ -74,10 +66,16 @@ const UserController = {
     try {
       const { rows } = await pool.query(text, [email]);
       if (!rows[0]) {
-        return res.status(404).json({ message: 'user with this details can not be found' });
+        return res.status(404).json({
+          status: 404,
+          message: 'user with this details can not be found',
+        });
       }
       if (!Helper.comparePassword(rows[0].password, password)) {
-        return res.status(401).json({ message: 'wrong password, try again' });
+        return res.status(401).json({
+          status: 401,
+          message: 'wrong password, try again',
+        });
       }
       const token = Helper.genrateToken(rows[0].id, rows[0].isadmin);
       return res.status(200).json({

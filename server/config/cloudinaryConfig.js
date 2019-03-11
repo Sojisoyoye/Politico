@@ -1,15 +1,23 @@
-// import { config, uploader } from 'cloudinary';
-// import dotenv from 'dotenv';
+import multer from 'multer';
+import cloudinary from 'cloudinary';
+import cloudinaryStorage from 'multer-storage-cloudinary';
+import dotenv from 'dotenv';
 
-// dotenv.config();
+dotenv.config();
 
-// const cloudinaryConfig = (req, res, next) => {
-// config({
-// cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-// api_key: process.env.CLOUDINARY_API_KEY,
-// api_secret: process.env.CLOUDINARY_API_SECRET,
-// });
-// next();
-// };
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-// export { cloudinaryConfig, uploader };
+const storage = cloudinaryStorage({
+  cloudinary,
+  folder: 'politicoImgs',
+  allowedFormats: ['jpg', 'png'],
+});
+
+const parser = multer({ storage });
+
+
+export default parser;

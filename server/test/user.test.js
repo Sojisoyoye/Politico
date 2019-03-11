@@ -1,10 +1,14 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import path from 'path';
+import fs from 'fs';
 import app from '../app';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
+
+const file = fs.readFileSync(path.resolve(__dirname, './asset/Andela.jpg'));
 
 describe('USERS', () => {
   describe('/POST Sign up user', () => {
@@ -12,15 +16,14 @@ describe('USERS', () => {
       chai
         .request(app)
         .post('/api/v1/auth/signup')
-        .send({
-          firstname: 'foo',
-          lastname: 'bar',
-          othername: 'o',
-          email: 'foo@email.com',
-          password: '123456',
-          phonenumber: '0801111111',
-          passporturl: 'www.foo.com',
-        })
+        .type('form')
+        .field('firstname', 'foo')
+        .field('lastname', 'bar')
+        .field('othername', 'o')
+        .field('email', 'foo@email.com')
+        .field('password', '123456')
+        .field('phonenumber', '08011111111')
+        .attach('passporturl', file, 'Andela.jpg')
         .end((err, res) => {
           expect(res).to.have.status(201);
           expect(res.body.status).to.be.equal(201);
@@ -34,7 +37,7 @@ describe('USERS', () => {
       chai
         .request(app)
         .post('/api/v1/auth/login')
-        .send({ email: 'foo@email.com', password: '123456' })
+        .send({ email: 'user@email.com', password: '123456' })
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body.status).to.be.equal(200);
