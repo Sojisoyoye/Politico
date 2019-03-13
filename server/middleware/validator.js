@@ -59,13 +59,13 @@ const validateParty = [
     .withMessage('party address must be string')
     .isLength({ min: 5 })
     .withMessage('address must be at least 5 characters long'),
-  check('logoUrl')
-    .not()
-    .isEmpty()
-    .withMessage('please provide a logo url'),
-  body('logoUrl')
-    .isURL()
-    .withMessage('logoURl must be a URL'),
+  // check('logoUrl')
+  // .not()
+  // .isEmpty()
+  // .withMessage('please provide a logo url'),
+  // body('logoUrl')
+  // .isURL()
+  // .withMessage('logoURl must be a URL'),
 ];
 
 const validateOffice = [
@@ -189,7 +189,7 @@ const validationHandler = (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({
       status: 422,
-      error: errors.array()[0],
+      error: errors.array().map(error => error.msg),
     });
   }
   return next();

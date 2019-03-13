@@ -238,6 +238,7 @@ margin: 0 auto;
   margin-right: auto;
   color: #444;
 }
+
 .app_signup_signup_sheet_error_message {
   color: #f00;
   margin-bottom: 15px;
@@ -831,6 +832,18 @@ input.app_signin_text_input_input {
   margin-right: auto;
 }
 
+#site-main .err_container {
+  margin-bottom: 10px;
+  background: #ffe6e6;
+  padding: 5px;
+  color: #f00;
+}
+
+#site-main .err_container li {
+  font-size: 0.8rem;
+}
+
+
 input.app_signin_text_pol_input_input {
   width: 94%;
   font-size: 14px;
@@ -993,6 +1006,17 @@ text-align: left;
 
 /* Political Party Buttons */
 
+#site-main .main .political__meta .create__party__button {
+  width: 25%;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #212121;
+  background-color: #42a5f5;
+  height: 43px;
+  border-radius: 5px;
+  }
+
 #site-main .main .political__table tbody button {
   width: 60px;
   padding: 5px;
@@ -1046,4 +1070,35 @@ text-align: left;
 #site-main .main .pagination button:hover {
   background: #a9cfff;
   color: #000;
+}
+
+.toast_msg {
+  position: fixed;
+  right: 50%;
+  width: 70%;
+  height: 35px;
+  border-radius: 5px;
+  padding: 0 20px;transform: translate(50%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ /* background-color: lightgreen; */
+}
+
+.toast_msg p {
+  font-weight: 400;
+  font-size: 0.9em;
+}
+
+.toast_success {
+  color: green;
+  font-size: 20px;
+  text-align: center;
+}
+
+.toast_error {
+  color: #f00;
+  font-size: 20px;
+  text-align: center;
 }

@@ -4,9 +4,9 @@ import pool from './connect';
 const partiesTable = `CREATE TABLE IF NOT EXISTS
 parties(
     id SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(128) UNIQUE NOT NULL,
-    hqAddress VARCHAR(128) NOT NULL,
-    logoUrl VARCHAR(25) NOT NULL
+    name VARCHAR(255) UNIQUE NOT NULL,
+    hqAddress VARCHAR(255) NOT NULL,
+    logoUrl VARCHAR(255)
 );`;
 
 const officesTable = `CREATE TABLE IF NOT EXISTS

@@ -21,20 +21,21 @@ const PartyController = {
     const values = [
       req.body.name,
       req.body.hqAddress,
-      req.body.logoUrl,
+      req.file.url,
     ];
 
     try {
       const { rows } = await pool.query(text, values);
       return res.status(201).json({
         status: 201,
+        message: 'Party created Successfully',
         data: rows[0],
       });
     } catch (error) {
       if (error.constraint === 'parties_name_key') {
         return res.status(406).json({
           status: 406,
-          error: 'party name already exist',
+          message: 'party name already exist',
         });
       }
       return res.status(400).json({

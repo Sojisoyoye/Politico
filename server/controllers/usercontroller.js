@@ -11,10 +11,6 @@ const UserController = {
   async createUser(req, res) {
     const hashPassword = Helper.hashPassword(req.body.password);
 
-    // parser.single('passporturl');
-    // console.log(req.file);
-
-
     const createQuery = `INSERT INTO
     users(firstname, lastname, othername, email, password, phonenumber, passporturl)
     VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
