@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 // });
 
 // Parties endpoints
-router.post('/parties', validations.validateParty, validations.validationHandler, Authenticate.verifyAdmin, PartyController.postParty);
+router.post('/parties', parser.single('logoUrl'), validations.validateParty, validations.validationHandler, Authenticate.verifyAdmin, PartyController.postParty);
 
 router.get('/parties', Authenticate.verifyToken, PartyController.getParties);
 

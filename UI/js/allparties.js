@@ -25,7 +25,7 @@ fetch(url, options)
                   <td>${party.id}</td>
                   <td>${party.name}</td>
                   <td>${party.hqaddress}</td>
-                  <td>${party.logourl}</td>
+                  <td><img src="${party.logourl}" alt="${party.name} class="party-logo"></td>
                   </tr> 
                   `;
           partyTableBody.insertAdjacentHTML('beforeend', row);
@@ -37,6 +37,7 @@ fetch(url, options)
   });
 
 // <td><img src="${party.logoUrl}" alt="${party.name} class="party-logo"></td>
+// <td>${party.logourl}</td>
 
 // const allUsersEndpoint =
 // `${basepath}/users/?userid=${e.target.parentElement.getAttribute('data-id')}`

@@ -1,9 +1,13 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import path from 'path';
+import fs from 'fs';
 import app from '../app';
 
 chai.use(chaiHttp);
 const { expect } = chai;
+
+const file = fs.readFileSync(path.resolve(__dirname, './asset/NigeriaFlag.jpg'));
 
 let adminToken;
 let userToken;
@@ -26,11 +30,10 @@ describe('PARTIES', () => {
         .request(app)
         .post('/api/v1/parties')
         .set('authorization', `Bearer ${adminToken}`)
-        .send({
-          name: 'new nigeria party ',
-          hqAddress: 'aso rock, abuja',
-          logoUrl: 'www.nnp.com',
-        })
+        .type('form')
+        .field('name', 'New Nigeria Party')
+        .field('hqAddress', '1, Aso Rock, Abuja')
+        .attach('logoUrl', file, 'NigeriaFlag.jpg')
         .end((err, res) => {
           expect(res).to.have.status(201);
           expect(res.body.status).to.be.equal(201);

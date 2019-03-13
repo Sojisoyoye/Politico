@@ -15,6 +15,7 @@ const storage = cloudinaryStorage({
   cloudinary,
   folder: 'politicoImgs',
   allowedFormats: ['jpg', 'png'],
+  transformation: [{ width: 100, height: 100, crop: 'limit' }],
 });
 
 const parser = multer({ storage });
