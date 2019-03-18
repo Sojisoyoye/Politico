@@ -17,11 +17,6 @@ router.get('/', (req, res) => {
   res.status(200).json({ message: 'Welcome to Politico API version 1' });
 });
 
-// router.post('/upload', parser.single('passport'), (req, res) => {
-// console.log('req.file:', req.file.url);
-// res.status(200).json({ message: 'upload successful' });
-// });
-
 // Parties endpoints
 router.post('/parties', parser.single('logoUrl'), validations.validateParty, validations.validationHandler, Authenticate.verifyAdmin, PartyController.postParty);
 
