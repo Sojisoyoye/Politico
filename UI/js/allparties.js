@@ -14,10 +14,8 @@ const options = {
 fetch(url, options)
   .then(res => res.json())
   .then((resp) => {
-    // console.log(resp.data);
     if (resp.status === 200) {
       const { data } = resp;
-      // console.log(data);
       if (data.length) {
         let row;
         data.forEach((party) => {
@@ -39,7 +37,6 @@ fetch(url, options)
 const getAparty = (event) => {
   event.preventDefault();
 
-  // const token = localStorage.getItem('token');
   const partyid = event.target.getAttribute('data-partyid');
 
   const partyUrl = `http://localhost:3000/api/v1/parties/${partyid}`;
