@@ -59,13 +59,6 @@ const validateParty = [
     .withMessage('party address must be string')
     .isLength({ min: 5 })
     .withMessage('address must be at least 5 characters long'),
-  // check('logoUrl')
-  // .not()
-  // .isEmpty()
-  // .withMessage('please provide a logo url'),
-  // body('logoUrl')
-  // .isURL()
-  // .withMessage('logoURl must be a URL'),
 ];
 
 const validateOffice = [
@@ -74,14 +67,14 @@ const validateOffice = [
     .isEmpty()
     .withMessage('please provide an office type'),
   body('type')
-    .custom(type => /^[a-zA-Z\s]+$/.test(type))
+    .custom(type => /^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(type))
     .withMessage('please provide a valid office type'),
   check('name')
     .not()
     .isEmpty()
     .withMessage('please provide an office name'),
   body('name')
-    .custom(name => /^[a-zA-Z\s]+$/.test(name))
+    .custom(name => /^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(name))
     .withMessage('please provide a valid office name'),
 ];
 
@@ -94,7 +87,7 @@ const validateNameUpdate = [
     .isEmpty()
     .withMessage('please provide a name to update'),
   body('name')
-    .custom(name => /^[a-zA-Z\s]+$/.test(name))
+    .custom(name => /^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(name))
     .withMessage('name must contain only letters'),
 ];
 

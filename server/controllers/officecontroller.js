@@ -15,25 +15,26 @@ const OfficeController = {
    * @returns {object} JSON API Response
    */
   async postOffice(req, res) {
-    const text = `INSERT INTO offices(type, name)
+    const text = `INSERT INTO offices(name, type)
     VALUES($1, $2)
     RETURNING *`;
     const values = [
-      req.body.type,
       req.body.name,
+      req.body.type,
     ];
 
     try {
       const { rows } = await pool.query(text, values);
       return res.status(201).json({
         status: 201,
+        message: 'Office Created Successfully',
         data: rows[0],
       });
     } catch (error) {
       if (error.constraint === 'offices_name_key') {
         return res.status(406).json({
           status: 406,
-          error: 'office name already exist',
+          message: 'Office name already exist',
         });
       }
       return res.status(400).json({
