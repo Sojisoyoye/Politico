@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+    <title>Politico | Create Government Office</title>
+</head>
+
+<body>
+    <div class="header">
+            <a class="header__link" href="index.html">
+                <h1 class="header__logo">Politico</h1> 
+            </a>
+            <section class="menu__section">
+                <ul class="menu">
+                    <li><a class="menu__item menu__item--selected" href="index.html">Sign out</a></li>
+                </ul>
+            </section>
+    </div>
+
+    <main id="site-main" class="row">
+        <aside class="aside">
+            <nav class="aside__nav">
+            <ul>
+                <li><a href="adminpage.html">Admin Section</a></li>
+                <li><a href="politicalparty.html">Political Parties</a></li>
+                <li><a class="selected" href="govtoffice.html">Government Offices</a></li>
+                <li><a href="">Candidates</a></li>
+            </ul>
+            </nav>
+        </aside>
+
+        <section class="main">
+            <div class="app_signup_signup_sheet_media_container">
+                <div class="app_signup_vote_sheet_content_container">
+                    <h1 class="app_signup_vote_sheet_info_message">Create Government Office</h1>
+                <div class="VoteTabContainer VoteTabContainer--basic">
+                    <div class="SigninTabContainer__form">
+                        <form method="POST" id="create_office_form" class="app_signup_signup_sheet_signup_form">
+                            <div class="app_signup_text_input_outer">
+                                    <label>
+                                            <div class="app_signup_text_input_label_text">
+                                                <span>Office Name</span>
+                                            </div>
+                                            <input type="text" id="name" name="name" class="app_signup_text_input_input" required>
+                                        </label>
+                            </div>            
+                            <div class="app_signup_text_input_outer">
+                                    <label>
+                                            <div class="app_signup_text_input_label_text">
+                                                <span>Office Type</span>
+                                            </div>
+                                            <input type="text" id="type" name="type" class="app_signup_text_input_input" required>
+                                        </label>
+                            </div>
+                            <button>Create Office</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+<div class="copyright_footer">
+        <div class="copyright_footer--content">
+            © Copyright 2019&nbsp;<a href="/" class="footer-legal-link">Politico</a>. All Rights Reserved.&nbsp;<a href="" class="footer-legal-link">Privacy Policy</a>&nbsp;•&nbsp;<a href="" class="footer-legal-link">Terms of Use</a>
+        </div>
+    </div> 
+</body>
+<script src="/UI/js/createoffice.js"></script>
+</html>

@@ -43,7 +43,3 @@ const postData = (event) => {
 };
 
 document.getElementById('sign_in_form').addEventListener('submit', postData);
-
-// document.getElementsById('sign_in_btn').addEventListener('submit', () => {
-// document.getElementsByClassName('e-err').innerHTML = '';
-// });
