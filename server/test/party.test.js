@@ -127,7 +127,7 @@ describe('PARTIES', () => {
     it('should update the name of a political party', (done) => {
       chai
         .request(app)
-        .patch('/api/v1/parties/1/name')
+        .patch('/api/v1/parties/1')
         .set('authorization', `Bearer ${adminToken}`)
         .send({ name: 'New Peoples Nigeria Party' })
         .end((err, res) => {
@@ -140,7 +140,7 @@ describe('PARTIES', () => {
     it('should return error if party to update can not be found', (done) => {
       chai
         .request(app)
-        .patch('/api/v1/parties/10/name')
+        .patch('/api/v1/parties/10')
         .set('authorization', `Bearer ${adminToken}`)
         .send({ name: 'New Life Party' })
         .end((err, res) => {

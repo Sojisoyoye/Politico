@@ -40,79 +40,7 @@
             <button onclick="window.location.href='createparty.html'" class="create__party__button">Create Party</button>
           </p>
           <h3 class="header1">List of Political Parties</h3>
-        </div>
-       <!-- <h3 class="header1">Political Parties</h3>
-        <div class="sort">
-          <div class="add-new">
-              <fieldset>
-                  <legend>Create New Political Party</legend>
-                <form class="sort-add"> 
-
-                  <div class="app_signup_text_input_outer">
-
-                      <label for="partyname">
-                        <div class="app_signup_text_input_label_text">
-                            <span>Party Name</span>
-                        </div>
-                        <input type="text" placeholder="Enter name.." class="app_signin_text_pol_input_input" required>
-                        </label>
-
-                  </div>
-
-                  <div class="app_signup_text_input_outer">
-
-                      <label for="partyaddress">
-                        <div class="app_signup_text_input_label_text">
-                            <span>Party Address</span>
-                        </div>
-                        <input type="text" placeholder="Enter address.." class="app_signin_text_pol_input_input" required>
-                        </label>
-
-                  </div>
-
-                  <div class="app_signup_text_input_outer">
-
-                      <label for="partyacroymn">
-                        <div class="app_signup_text_input_label_text">
-                            <span>Party Acroymn</span>
-                        </div>
-                        <input type="text" placeholder="Enter acroymn.." class="app_signin_text_pol_input_input" required>
-                        </label>
-
-                  </div>
-
-                  <div class="app_signup_text_input_outer">
-
-                      <label for="partyacroymn">
-                        <div class="app_signup_text_input_label_text">
-                            <span>Party Logo</span>
-                        </div>
-                        <input type="file" placeholder="logo.." class="app_signin_text_pol_input_input" required>
-                        </label>
-
-                  </div>
-
-                  <button class="add-party-button">Create</button>
-                  
-
-                   <label for="partyaddress">
-                      <span>Party Name</span>
-                        <input type="text" placeholder="Enter address.." required>
-                    </label>
-                  <label for="partyacroymn">
-                    <span>Party Acronym</span>
-                      <input type="text" placeholder="Enter acronym.." required>
-                  </label>
-                  <label for="partylogo"> 
-                    <span>Upload party logo </span>
-                  <input type="file" placeholder="Party logo" required>
-                  </label> 
-                   <input type="submit" value="Create Party">
-                </form>
-                </fieldset>
-          </div>
-          
-        </div> -->
+      </div>
       
       <div class="table-wrapper no-flow">
         <table class="political__table">
@@ -120,47 +48,19 @@
             <tr>
               <th>Party ID</th>
               <th>Party Name</th>
+              <th>Party Address</th>
               <th>Logo</th>
-              <th>Party Acronym</th>
               <th style="text-align: center">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
+          <tbody id="party_admin_table_body">
+           <!-- <tr>
               <td>01</td>
               <td>Accord</td>
+              <td>2, Community Road, Ajah</td>
               <td><img src="img/Accord.jpg" style="width:100px" alt="accord"></td>
-              <td>A</td>
-              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
-            </tr>
-              <td>02</td>
-              <td>Action Alliance</td>
-              <td><img src="img/ActionAlliance.jpg" style="width:100px" alt="action alliance"></td>
-              <td>AA</td>
-              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
-            </tr>
-            <tr>
-              <td>03</td>
-              <td>African Action Congress</td>
-              <td><img src="img/AAC.png" style="width:100px" alt="African action congress"></td>
-              <td>AAC</td>
-              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
-            </tr>
-            
-            <tr>
-              <td>04</td>
-              <td>Alliance for Democracy</td>
-              <td><img src="img/ad.png" style="width:100px" alt="Alliance for Democracy"></td>
-              <td>AD</td>
-              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
-            </tr>
-            <tr>
-              <td>05</td>
-              <td>African Democratic Congress</td>
-              <td><img src="img/adc.jpg" style="width:100px" alt="african democratic congress"></td>
-              <td>ADC</td>
-              <td style="text-align: center"><button class="blue">Edit</button> <button class="red">Delete</button></td>
-            </tr>
+              <td style="text-align: center"><button class="blue">Edit</button><button class="red">Delete</button></td>
+            </tr> -->
             </tbody>
           </table>
         </div>
@@ -177,7 +77,7 @@
     <div class="copyright_footer--content">
         © Copyright 2019&nbsp;<a href="" class="footer-legal-link">Politico</a>. All Rights Reserved.&nbsp;<a href="" class="footer-legal-link">Privacy Policy</a>&nbsp;•&nbsp;<a href="" class="footer-legal-link">Terms of Use</a>
     </div>
-</div>
-        
+</div>    
 </body>
+<script src="/UI/js/adminpartysection.js"></script>
 </html>
