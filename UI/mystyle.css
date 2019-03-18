@@ -90,13 +90,6 @@ html, body {
     font-size: 38px;
     margin-left: 30px;
   }
-  
-  /*
-  img {
-    max-width:100%;
-    padding:0;
-    margin:0 0 1.45rem
-  } */
 
   .intro {
     padding:0;
@@ -204,6 +197,58 @@ margin: 0 auto;
         max-width: none;
         min-width: 0;
     }
+}
+
+/* Modal */
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.modal .form_body {
+  width: 300px;
+  background: #fff;
+  padding: 20px;
+}
+
+.modal .form_body h3 {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.modal .form_body input,
+.modal .form_body select {
+  display: block;
+  margin: 3px;
+  width: 100%;
+  height: 45px;
+  padding: 3px;
+  border: 1px solid #e7e7e7;
+  outline: none;
+}
+
+.modal .form_body input:focus,
+.modal .form_body select:focus {
+  border: 1px solid #4297ff;
+}
+
+.modal .form_body button {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.modal .form_body button#confirm_delete {
+  background: #fa4e4e;
 }
 
 /* Signup Container */

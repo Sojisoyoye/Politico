@@ -29,7 +29,7 @@ router.get('/parties', Authenticate.verifyToken, PartyController.getParties);
 
 router.get('/parties/:id', Authenticate.verifyToken, PartyController.getAParty);
 
-router.patch('/parties/:id/name', validations.validateNameUpdate, validations.validationHandler, Authenticate.verifyAdmin, PartyController.updateName);
+router.patch('/parties/:id', validations.validateNameUpdate, validations.validationHandler, Authenticate.verifyAdmin, PartyController.updateName);
 
 router.delete('/parties/:id', validations.validatePartyId, validations.validationHandler, Authenticate.verifyAdmin, PartyController.deleteParty);
 

@@ -36,15 +36,6 @@ fetch(url, options)
     }
   });
 
-// <td><img src="${party.logoUrl}" alt="${party.name} class="party-logo"></td>
-// <td>${party.logourl}</td>
-
-// const allUsersEndpoint =
-// `${basepath}/users/?userid=${e.target.parentElement.getAttribute('data-id')}`
-// <button data-id=${e.target.parentElement.getAttribute('data-id')}
-// id='confirm-delete'>Yes</button>
-// <h3>Update User</h3><form id="update-user-form" data-id=${id}></form>
-
 const getAparty = (event) => {
   event.preventDefault();
 
