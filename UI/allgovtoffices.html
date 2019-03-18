@@ -38,98 +38,45 @@
       <section class="political">
         <div class="political__meta">
           <h3 class="header1">Government Offices</h3>
-          <p>Filter an Office name in the field below to view the candidates running for that specific office.</p>
-        <div class="sort">
-          <form>
-            <fieldset>
-                    <legend>Filter Office name</legend>
-                    <select class="filter-record">
-                        <option value="">President</option>
-                        <option value="">Governor</option>
-                        <option value="">Federal House of Reps.</option>
-                        <option value="">Local Govt. Chairman</option>
-                      </select>
-                   <!-- <input class="search-input" type="text" placeholder="Enter office name"> -->
-                    <!-- <button>View</button> -->
-                    <input type="submit" value="View"> 
-            </fieldset> 
-          </form>  
-        </div>
+          <p>Search for an office name in the field below</p>
+
+          <div class="sort">
+            <form>
+
+              <fieldset>
+                <legend>Filter Rows</legend>
+                <select class="filter-record">
+                  <option value="">10 Records</option>
+                  <option value="">50 Records</option>
+                  <option value="">100 Records</option>
+                </select>
+              </fieldset>
+
+            </form>
+
+            <form id="sort__id">
+              <fieldset>
+                      <legend>Search for an Office</legend>
+                      <input class= "search-input" type="text" placeholder="Enter party ID">
+                      <button>Search</button> 
+              </fieldset>
+            </form>
+            </div>
+        
         <div>
-          <h3 class="header1">Candidates running for president</h3>
+          <h3 class="header1">List of Government Offices</h3>
         </div>
         </div>
           <div class="table-wrapper no-flow">
             <table class="political__table">
               <thead>
                 <tr>
-                  <th>Candidate</th>
-                  <th>Party</th>
-                  <th>Party Acronym</th>
-                  <th>Party Logo</th>
+                  <th>office ID</th>
+                  <th>Office Name</th>
+                  <th>Office Type</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Paul Faruq</td>
-                  <td>Accord</td>
-                  <td>A</td>
-                  <td><img src="img/Accord.jpg" style="width:100px" alt="accord"></td>  
-                </tr>
-                <tr>
-                  <td>Deola Oti</td>
-                  <td>Action Alliance</td>
-                  <td>AA</td>
-                  <td><img src="img/ActionAlliance.jpg" style="width:100px" alt="action alliance"></td>
-                </tr>
-                <tr>
-                  <td>Oluwole Peters</td>
-                  <td>African Action Congress</td>
-                  <td>AAc</td>
-                  <td><img src="img/AAC.png" style="width:100px" alt="African action congress"></td>
-                </tr>
-                <tr>
-                  <td>Lanre Badmus</td>
-                  <td>Alliance for Democracy</td>
-                  <td>AD</td>
-                  <td><img src="img/ad.png" style="width:100px" alt="Alliance for Democracy"></td>
-                </tr>
-                <tr>
-                  <td>Alao Akala</td>
-                  <td>African Democratic Congress</td>
-                  <td>ADC</td>
-                  <td><img src="img/adc.jpg" style="width:100px" alt="african democratic congress"></td>
-                </tr>
-                <tr>
-                  <td>Betty Irabor</td>
-                  <td>Alliance People Democratic Party</td>
-                  <td>APDP</td>
-                  <td><img src="img/alliancepeopledemparty.jpg" style="width:100px" alt="apdp"></td>
-                </tr>
-                <tr>
-                  <td>Gboyega Bola</td>
-                  <td>Alternative Party of Nigeria</td>
-                  <td>APN</td>
-                  <td><img src="img/AlternativePN.png" style="width:100px" alt="apn"></td>
-                </tr>
-                <tr>
-                  <td>Kola Oyewo</td>
-                  <td>Action Peoples Party</td>
-                  <td>APP</td>
-                  <td><img src="img/actionpeoplesparty.jpeg" style="width:100px" alt="app"></td>
-                </tr>
-                <tr>
-                  <td>Bola Ajibola</td>
-                  <td>Change Advocacy Party</td>
-                  <td>CAP</td>
-                  <td><img src="img/ChangeAdvParty.jpg" style="width:100px" alt="cap"></td>
-                </tr>
-                <tr>
-                  <td>Ebenezer Obey</td>
-                  <td>Young Democratic Party</td>
-                  <td>YDP</td>
-                  <td><img src="img/younddemparty.jpg" style="width:100px" alt="YDP"></td>
-                </tr>
+              <tbody id="office_table_body" >
               </tbody>
             </table>
           </div>
@@ -147,4 +94,5 @@
       </div>
     </div>     
 </body>
+<script src="/UI/js/alloffices.js"></script>
 </html>

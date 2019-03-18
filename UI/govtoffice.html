@@ -39,6 +39,15 @@
           <p>To create a new Government office, click on the button.
             <button onclick="window.location.href='creategovtoffice.html'" class="create__party__button">Create Office</button>
           </p>
+
+         <!--- <form id="sort__id">
+            <fieldset>
+                    <legend>Search for a Party</legend>
+                    <input class= "search-input" type="text" placeholder="Enter party ID">
+                    <button>Search</button> 
+            </fieldset>
+          </form> -->
+
         <div class="political__meta">
           <h3 class="header1">List of Government Offices</h3>
         </div>
@@ -51,12 +60,12 @@
                 <th>Office Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="office_admin_table_body">
+             <!-- <tr>
                 <td>1</td>
                 <td>Governor, Lagos State</td>
                 <td>State</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -77,4 +86,5 @@
 </div>
         
 </body>
+<script src="/UI/js/adminofficesection.js"></script>
 </html>
