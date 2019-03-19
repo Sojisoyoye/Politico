@@ -119,31 +119,32 @@ const OfficeController = {
       const response = await pool.query(registerUserQuery, values);
       return res.status(200).json({
         status: 200,
+        message: 'User registered successfully',
         data: response.rows[0],
       });
     } catch (error) {
       if (error.constraint === 'candidates_candidate_fkey') {
         return res.status(404).json({
           status: 404,
-          error: 'user can not be found',
+          message: 'User can not be found',
         });
       }
       if (error.constraint === 'candidates_office_fkey') {
         return res.status(404).json({
           status: 404,
-          error: 'office can not be found',
+          message: 'Office can not be found',
         });
       }
       if (error.constraint === 'candidates_party_fkey') {
         return res.status(404).json({
           status: 404,
-          error: 'party can not be found',
+          message: 'Party can not be found',
         });
       }
       if (error.constraint === 'candidates_pkey') {
         return res.status(406).json({
           status: 406,
-          error: 'candidate already registered',
+          message: 'Candidate already registered',
         });
       }
       return res.status(400).json({

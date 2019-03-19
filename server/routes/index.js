@@ -18,7 +18,9 @@ router.get('/', (req, res) => {
 });
 
 // Users endpoint
-router.get('/users', UserController.getUsers);
+router.get('/users', Authenticate.verifyAdmin, UserController.getUsers);
+
+router.get('/users/:id', Authenticate.verifyAdmin, UserController.getAUser);
 
 // Parties endpoints
 router.post('/parties', parser.single('logoUrl'), validations.validateParty, validations.validationHandler, Authenticate.verifyAdmin, PartyController.postParty);
