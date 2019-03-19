@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+  <title>Politico | Political Party</title>
+</head>
+
+<body>
+<div class="header">
+  <a class="header__link" href="/index.html">
+    <h1 class="header__logo">Politico</h1> 
+  </a>
+  <section class="menu__section">
+    <ul class="menu">
+      <li><a class="menu__item menu__item--selected" href="index.html">Sign out</a></li>
+    </ul>
+  </section>
+</div>
+
+<main id="site-main" class="row">
+  <aside class="aside">
+    <nav class="aside__nav">
+      <ul>
+        <li><a href="adminpage.html">Admin Section</a></li>
+        <li><a href="politicalparty.html">Political Parties</a></li>
+        <li><a href="govtoffice.html">Government Offices</a></li>
+        <li><a class="selected" href="users.html">Register User</a></li>
+        <li><a href="">Candidates</a></li>
+      </ul>
+    </nav>
+  </aside>
+  
+  <section class="main">
+    <section class="political">
+      <div class="political__meta">
+          <h3 class="header1">Users Settings page</h3>
+          <p>You can register a user as a candidate to run for an office on this page. Simply click on the register button under
+              the register column of the specific user to register.
+            <!-- <button onclick="window.location.href='createparty.html'" class="create__party__button">Create Party</button> -->
+          </p>
+          
+          <div class="sort">
+                <form>
+    
+                  <fieldset>
+                    <legend>Filter Rows</legend>
+                    <select class="filter-record">
+                      <option value="">10 Records</option>
+                      <option value="">50 Records</option>
+                      <option value="">100 Records</option>
+                    </select>
+                  </fieldset>
+    
+                </form>
+    
+                <form id="sort__id">
+                  <fieldset>
+                          <legend>Search User</legend>
+                          <input class= "search-input" type="text" placeholder="Enter User ID">
+                          <button>Search</button> 
+                  </fieldset>
+                </form>
+                </div>
+          
+          <h3 class="header1">Users</h3>
+      </div>
+      
+      <div class="table-wrapper no-flow">
+
+        <table class="political__table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th style="text-align: center">Register</th>
+            </tr>
+          </thead>
+          <tbody id="user_admin_table_body">
+          </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <section class="pagination">
+        <button class="pagination__prev">⬅ Previous Page</button>
+        <button class="pagination__next">Next Page ➡</button>
+    </section>
+
+  </section>
+</section>
+</main>
+<div class="copyright_footer">
+    <div class="copyright_footer--content">
+        © Copyright 2019&nbsp;<a href="" class="footer-legal-link">Politico</a>. All Rights Reserved.&nbsp;<a href="" class="footer-legal-link">Privacy Policy</a>&nbsp;•&nbsp;<a href="" class="footer-legal-link">Terms of Use</a>
+    </div>
+</div>    
+</body>
+<script src="/UI/js/adminusersection.js"></script>
+</html>

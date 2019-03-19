@@ -1,6 +1,5 @@
 const nil = undefined;
 const toastSuccess = 'toast_success';
-// const toastError = 'toast_error';
 const createPartyForm = document.querySelector('#create_party_form');
 const token = localStorage.getItem('token');
 

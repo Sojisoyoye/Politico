@@ -120,6 +120,38 @@ const UserController = {
       });
     }
   },
+
+  /**
+   * @method getAUser
+   * @description Retrieves a specific user with a given ID
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  async getAUser(req, res) {
+    const text = 'SELECT id, firstname, lastname, email FROM users WHERE id = $1';
+    try {
+      const { rows } = await pool.query(text, [req.params.id]);
+      if (rows[0]) {
+        res.status(200).json({
+          status: 200,
+          data: rows[0],
+        });
+      }
+      if (!rows[0]) {
+        res.status(404).json({
+          status: 404,
+          error: 'user can not found',
+        });
+      }
+    } catch (error) {
+      res.status(400).json({
+        status: 400,
+        error,
+      });
+    }
+  },
 };
+
 
 export default UserController;
