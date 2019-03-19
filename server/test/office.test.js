@@ -30,8 +30,6 @@ describe('OFFICES', () => {
           name: 'Governor Lagos',
         })
         .end((err, res) => {
-          // console.log(res);
-          //  console.log(err);
           expect(res).to.have.status(401);
           done(err);
         });

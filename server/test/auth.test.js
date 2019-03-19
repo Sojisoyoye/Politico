@@ -8,7 +8,6 @@ const res = {};
 describe('Authentication', () => {
   it('should return error if header is not set', (done) => {
     expect(Authenticate).to.be.an('object');
-    // expect(Authenticate).to.include('verifyToken, verifyAdmin');
     done();
   });
 
