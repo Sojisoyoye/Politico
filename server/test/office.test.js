@@ -21,6 +21,22 @@ describe('OFFICES', () => {
         });
     });
 
+    it('should return error if header is not present', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/offices')
+        .send({
+          type: 'State',
+          name: 'Governor Lagos',
+        })
+        .end((err, res) => {
+          // console.log(res);
+          //  console.log(err);
+          expect(res).to.have.status(401);
+          done(err);
+        });
+    });
+
     it('should create a new political office', (done) => {
       chai
         .request(app)

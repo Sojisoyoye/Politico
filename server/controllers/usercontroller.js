@@ -141,7 +141,7 @@ const UserController = {
       if (!rows[0]) {
         res.status(404).json({
           status: 404,
-          error: 'user can not found',
+          error: 'user can not be found',
         });
       }
     } catch (error) {
