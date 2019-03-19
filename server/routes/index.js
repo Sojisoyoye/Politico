@@ -17,6 +17,9 @@ router.get('/', (req, res) => {
   res.status(200).json({ message: 'Welcome to Politico API version 1' });
 });
 
+// Users endpoint
+router.get('/users', UserController.getUsers);
+
 // Parties endpoints
 router.post('/parties', parser.single('logoUrl'), validations.validateParty, validations.validationHandler, Authenticate.verifyAdmin, PartyController.postParty);
 

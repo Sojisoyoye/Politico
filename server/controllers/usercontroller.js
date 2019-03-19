@@ -97,6 +97,29 @@ const UserController = {
       });
     }
   },
+
+  /**
+   * @method getUsers
+   * @description Gets the list of users
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  async getUsers(req, res) {
+    const findAllQuery = 'SELECT id, firstname, lastname, email FROM users';
+    try {
+      const { rows } = await pool.query(findAllQuery);
+      return res.status(200).json({
+        status: 200,
+        data: rows,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error,
+      });
+    }
+  },
 };
 
 export default UserController;
