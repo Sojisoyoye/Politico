@@ -169,19 +169,21 @@ const OfficeController = {
     const value = [office];
 
     try {
-      const { rows } = await pool.query(text, value);
-      if (rows[0]) {
+      const rowResp = await pool.query(text, value);
+      const { rows } = rowResp;
+      if (rows) {
+        // console.log(rows);
         res.status(200).json({
           status: 200,
-          data: rows[0],
+          data: rows,
         });
       }
-      if (!rows[0]) {
-        res.status(404).json({
-          status: 404,
-          error: 'no votes for this office',
-        });
-      }
+      // if (!rows) {
+      // res.status(404).json({
+      // status: 404,
+      // message: 'No votes for this office',
+      // });
+      // }
     } catch (error) {
       res.status(400).json({
         status: 400,
