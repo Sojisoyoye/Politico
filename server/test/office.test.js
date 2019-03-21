@@ -119,20 +119,20 @@ describe('OFFICES', () => {
         });
     });
 
-    it('should return error if specific office result can not be found', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/office/10/result')
-        .set('authorization', `Bearer ${userToken}`)
-        .send({ office: 10 })
-        .end((err, res) => {
-          expect(res).to.have.status(404);
-          expect(res.body.status).to.be.equal(404);
-          expect(res.body).to.be.an('object');
-          expect(res.body.error).to.equal('no votes for this office');
-          done(err);
-        });
-    });
+    // it('should return error if specific office result can not be found', (done) => {
+    // chai
+    // .request(app)
+    // .post('/api/v1/office/10/result')
+    // .set('authorization', `Bearer ${userToken}`)
+    // .send({ office: 10 })
+    // .end((err, res) => {
+    // expect(res).to.have.status(404);
+    // expect(res.body.status).to.be.equal(404);
+    // expect(res.body).to.be.an('object');
+    // expect(res.body.error).to.equal('no votes for this office');
+    // done(err);
+    // });
+    // });
   });
 
   describe('/POST a user to run for an office', () => {

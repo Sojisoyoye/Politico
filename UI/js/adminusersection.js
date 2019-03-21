@@ -56,7 +56,7 @@ const showUserModal = (resp) => {
   document.body.insertAdjacentHTML(
     'afterbegin',
     `<div class="modal">
-        <div class ="form_body">
+        <div class="form_body">
         <h3>Register a User for an Office</h3>
         <form id="reg_user_form" data-id="${id}">
         <input type="number" id="office_id" placeholder="Enter office id" />
