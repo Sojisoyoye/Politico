@@ -6,6 +6,7 @@ import PartyController from '../controllers/partycontroller';
 import OfficeController from '../controllers/officecontroller';
 import UserController from '../controllers/usercontroller';
 import VoteController from '../controllers/votecontroller';
+import CandidateController from '../controllers/candidatecontroller';
 import Authenticate from '../middleware/Auth';
 import validations from '../middleware/validator';
 
@@ -21,6 +22,8 @@ router.get('/', (req, res) => {
 router.get('/users', Authenticate.verifyAdmin, UserController.getUsers);
 
 router.get('/users/:id', Authenticate.verifyAdmin, UserController.getAUser);
+
+router.get('/candidates', Authenticate.verifyToken, CandidateController.getCandidates);
 
 // Parties endpoints
 router.post('/parties', parser.single('logoUrl'), validations.validateParty, validations.validationHandler, Authenticate.verifyAdmin, PartyController.postParty);

@@ -29,7 +29,7 @@
                 <li><a href="allpoliticalparty.html">All Political Parties</a></li>
                 <li><a href="allgovtoffices.html">All Government Offices</a></li> 
                 <li><a href="">Edit Profile</a></li>
-                <li><a href="registertorun.html">Register to Run</a></li>
+               <!-- <li><a href="registertorun.html">Register to Run</a></li> -->
             </ul>
             </nav>
         </aside>
@@ -39,50 +39,19 @@
                 <div class="app_signup_vote_sheet_content_container">
                     <h1 class="app_signup_vote_sheet_info_message">Vote</h1>
                 <div class="VoteTabContainer VoteTabContainer--basic">
-                    <div class="SignupTabContainer__form">
-                        <form class="app_signup_signup_sheet_signup_form">
-                            <div class="app_signup_text_input_outer">
-                                <label>
-                                    <div class="app_signup_text_input_label_text">
-                                        <span>Select State</span>
-                                    </div>
-                                    <select class="app_signup_input_select_input" name="" id="">
-                                        <option value="">Abia</option>
-                                        <option value="">Anambra</option>
-                                        <option value="">Bayelsa</option>
-                                        <option value="">Calabar</option>
-                                    </select>
-                                    <div class="app_signup_text_input_error_message">
-
-                                    </div>
-                                </label>
-                            </div>            
-                            <div class="app_signup_text_input_outer">
-                                <label>
-                                    <div class="app_signup_text_input_label_text">
-                                        <span>Select LGA</span>
-                                    </div>
-                                    <select class="app_signup_input_select_input" name="" id="">
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                    </select>
-                                    <div class="app_signup_text_input_error_message">
-
-                                    </div>
-                                </label>
-                            </div>
+                    <div class="SigninTabContainer__form">
+                        <form id="vote_form" class="app_signup_signup_sheet_signup_form" method="POST">
+                                     
+                            
                             <div class="app_signup_text_input_outer">
                                     <label>
                                         <div class="app_signup_text_input_label_text">
                                             <span>Select Office</span>
                                         </div>
-                                        <select class="app_signup_input_select_input" name="" id="">
-                                            <option value=""></option>
-                                            <option value=""></option>
+                                        <select class="app_signup_input_select_input" id="office_option">
+                                            <!--<option value=""></option>
+                                            <option value=""></option> -->
                                         </select>
-                                        <div class="app_signup_text_input_error_message">
-
-                                        </div>
                                     </label>
                             </div>
                             <div class="app_signup_text_input_outer">
@@ -90,32 +59,14 @@
                                     <div class="app_signup_text_input_label_text">
                                         <span>Select Candidate</span>
                                     </div>
-                                    <select class="app_signup_input_select_input" name="" id="">
-                                        <option value=""></option>
-                                        <option value=""></option>
+                                    <select class="app_signup_input_select_input" id="candidate_option">
+                                        <!--<option value=""></option>
+                                        <option value=""></option> -->
                                     </select>
-                                    <div class="app_signup_text_input_error_message">
-
-                                    </div>
                                 </label>
                             </div>
-                            <div class="app_signup_text_input_outer">
-                                <label>
-                                    <div class="app_signup_text_input_label_text">
-                                        <span>Political Party</span>
-                                    </div>
-                                    <select class="app_signup_input_select_input" name="" id="">
-                                        <option value="">Accord</option>
-                                        <option value="">Alliance for Democracy</option>
-                                        <option value="">Action Congress of Nigeria</option>
-                                        <option value="">People's Democratic Party</option>
-                                    </select>
-                                    <div class="app_signup_text_input_error_message">
-
-                                    </div>
-                                </label>
-                            </div>
-                            <button>Vote</button>
+                            
+                            <button type="submit">Vote</button>
                         </form>
                     </div>
                 </div>
@@ -130,4 +81,5 @@
         </div>
     </div> 
 </body>
+<script src="/UI/js/vote.js"></script>
 </html>

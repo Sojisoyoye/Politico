@@ -26,25 +26,26 @@ const VoteController = {
       const { rows } = await pool.query(text, values);
       return res.status(201).json({
         status: 201,
+        message: 'You have voted successfully',
         data: rows[0],
       });
     } catch (error) {
       if (error.constraint === 'votes_candidate_fkey') {
         return res.status(404).json({
           status: 404,
-          error: 'this candidate id doesn\'t exist',
+          message: 'this candidate id doesn\'t exist',
         });
       }
       if (error.constraint === 'votes_office_fkey') {
         return res.status(404).json({
           status: 404,
-          error: 'this office id doesn\'t exist',
+          message: 'this office id doesn\'t exist',
         });
       }
       if (error.constraint === 'votes_pkey') {
         return res.status(403).json({
           status: 403,
-          error: 'you have already voted for this office',
+          message: 'you have already voted for this office',
         });
       }
       return res.status(400).json({
