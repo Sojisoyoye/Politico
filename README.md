@@ -3,6 +3,7 @@
 
 A platform for both the politicians and citizens, which enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
+
 # Application Features
 >- Users can sign up and log in.
 >- Admin (electoral body) can create political parties.
