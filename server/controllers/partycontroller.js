@@ -38,9 +38,9 @@ const PartyController = {
           message: 'party name already exist',
         });
       }
-      return res.status(400).json({
-        status: 400,
-        error,
+      return res.status(500).json({
+        status: 500,
+        message: 'Server error',
       });
     }
   },
@@ -93,8 +93,8 @@ const PartyController = {
         });
       }
     } catch (error) {
-      res.status(400).json({
-        status: 400,
+      res.status(500).json({
+        status: 500,
         error,
       });
     }
@@ -164,8 +164,8 @@ const PartyController = {
         });
       }
     } catch (error) {
-      res.status(400).json({
-        status: 400,
+      res.status(500).json({
+        status: 500,
         error,
       });
     }

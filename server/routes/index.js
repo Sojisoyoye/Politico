@@ -7,6 +7,7 @@ import OfficeController from '../controllers/officecontroller';
 import UserController from '../controllers/usercontroller';
 import VoteController from '../controllers/votecontroller';
 import CandidateController from '../controllers/candidatecontroller';
+import PasswordControlller from '../controllers/passwordcontroller';
 import Authenticate from '../middleware/Auth';
 import validations from '../middleware/validator';
 
@@ -24,6 +25,14 @@ router.get('/users', Authenticate.verifyAdmin, UserController.getUsers);
 router.get('/users/:id', Authenticate.verifyAdmin, UserController.getAUser);
 
 router.get('/candidates', Authenticate.verifyToken, CandidateController.getCandidates);
+
+// Password endpoints
+
+router.post('/auth/reset', PasswordControlller.passwordReset);
+
+router.get('/password/reset/:token', PasswordControlller.passwordResetForm);
+
+router.post('/password/reset', PasswordControlller.resetPassword);
 
 // Parties endpoints
 router.post('/parties', parser.single('logoUrl'), validations.validateParty, validations.validationHandler, Authenticate.verifyAdmin, PartyController.postParty);

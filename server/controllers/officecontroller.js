@@ -60,8 +60,8 @@ const OfficeController = {
         data: rows,
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(500).json({
+        status: 500,
         error,
       });
     }
@@ -91,8 +91,8 @@ const OfficeController = {
         });
       }
     } catch (error) {
-      res.status(400).json({
-        status: 400,
+      res.status(500).json({
+        status: 500,
         error,
       });
     }
@@ -185,8 +185,8 @@ const OfficeController = {
       // });
       // }
     } catch (error) {
-      res.status(400).json({
-        status: 400,
+      res.status(500).json({
+        status: 500,
         error,
       });
     }

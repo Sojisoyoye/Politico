@@ -48,9 +48,9 @@ const VoteController = {
           message: 'you have already voted for this office',
         });
       }
-      return res.status(400).json({
-        status: 400,
-        error,
+      return res.status(500).json({
+        status: 500,
+        message: 'Server Error',
       });
     }
   },

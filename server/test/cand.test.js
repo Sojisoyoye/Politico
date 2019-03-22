@@ -32,5 +32,17 @@ describe('CANDIDATES', () => {
           done(err);
         });
     });
+
+    it('should return an error if invalid authorization token was specified', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/users')
+        .set('authorization', 'efbbwj3yu63t327iugwuqiyd')
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.body.message).to.equal('Token provided can not be authenticated');
+          done(err);
+        });
+    });
   });
 });

@@ -40,7 +40,7 @@ const UserController = {
       if (error.constraint === 'users_email_key') {
         return res.status(406).json({
           status: 406,
-          message: 'user with this email already exist',
+          message: 'User with this email already exist',
         });
       }
       return res.status(400).json({
@@ -64,13 +64,13 @@ const UserController = {
       if (!rows[0]) {
         return res.status(404).json({
           status: 404,
-          message: 'user with this details can not be found',
+          message: 'User with this details can not be found',
         });
       }
       if (!Helper.comparePassword(rows[0].password, password)) {
         return res.status(401).json({
           status: 401,
-          message: 'wrong password, try again',
+          message: 'Wrong password, try again',
         });
       }
       const token = Helper.genrateToken(rows[0].id, rows[0].isadmin);
@@ -145,8 +145,8 @@ const UserController = {
         });
       }
     } catch (error) {
-      res.status(400).json({
-        status: 400,
+      res.status(500).json({
+        status: 500,
         error,
       });
     }
