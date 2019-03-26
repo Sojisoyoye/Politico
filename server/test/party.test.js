@@ -1,7 +1,9 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import sinon from 'sinon';
 import path from 'path';
 import fs from 'fs';
+import pool from '../models/connect';
 import app from '../app';
 
 chai.use(chaiHttp);
@@ -42,18 +44,79 @@ describe('PARTIES', () => {
         });
     });
 
+    it('should return an error if political party name already exist', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/parties')
+        .set('authorization', `Bearer ${adminToken}`)
+        .type('form')
+        .field('name', 'New Nigeria Party')
+        .field('hqAddress', '1, Aso Rock, Abuja')
+        .attach('logoUrl', file, 'NigeriaFlag.jpg')
+        .end((err, res) => {
+          expect(res).to.have.status(406);
+          expect(res.body.status).to.be.equal(406);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message).to.equal('party name already exist');
+          done(err);
+        });
+    });
+
     it('should return an error if no authorization token was specified', (done) => {
       chai
         .request(app)
         .post('/api/v1/parties')
-        .set('authorization', 'undefined')
-        .send({
-          name: 'new life nigeria party',
-          hqAddress: 'ilupeju road',
-          logoUrl: 'www.nlnp.com',
-        })
+        .set('authorization', 'svbbcgshfhjt65356672fgegf')
+        .type('form')
+        .field('name', 'New Nigeria Party')
+        .field('hqAddress', '1, Aso Rock, Abuja')
+        .attach('logoUrl', file, 'NigeriaFlag.jpg')
         .end((err, res) => {
-          expect(res).to.have.status(400);
+          expect(res).to.have.status(401);
+          expect(res.body.message).to.equal('Token provided can not be authenticated');
+          done(err);
+        });
+    });
+
+    it('should return an error if an unauthorizated user tries to create a party', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/login')
+        .send({ email: 'user@email.com', password: '123456' })
+        .end((err, res) => {
+          userToken = res.body.data[0].token;
+          expect(res).to.have.status(200);
+          chai
+            .request(app)
+            .post('/api/v1/parties')
+            .set('authorization', `Bearer ${userToken}`)
+            .type('form')
+            .field('name', 'New Nigeria Party')
+            .field('hqAddress', '1, Aso Rock, Abuja')
+            .attach('logoUrl', file, 'NigeriaFlag.jpg')
+            .end((err1, res1) => {
+              expect(res1).to.have.status(403);
+              expect(res1.body.error).to.equal('You are not authorized. For Admins only');
+              done(err);
+            });
+        });
+    });
+
+    it('should return server error for connection error to the database', (done) => {
+      const stub = sinon.stub(pool, 'query').throws();
+
+      chai
+        .request(app)
+        .post('/api/v1/parties')
+        .set('authorization', `Bearer ${adminToken}`)
+        .type('form')
+        .field('name', 'New Nigeria Party')
+        .field('hqAddress', '1, Aso Rock, Abuja')
+        .attach('logoUrl', file, 'NigeriaFlag.jpg')
+        .end((err, res) => {
+          expect(res).to.have.status(500);
+          expect(res.body.status).to.be.equal(500);
+          stub.restore();
           done(err);
         });
     });
@@ -108,6 +171,20 @@ describe('PARTIES', () => {
           expect(res.body).to.be.an('object');
           expect(res.body.error).to.equal('party record not found');
           done(err);
+        });
+    });
+
+    it('should return server error for connection error to database', (done) => {
+      const stub = sinon.stub(pool, 'query').throws();
+
+      chai
+        .request(app)
+        .get('/api/v1/parties/1')
+        .set('authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(500);
+          stub.restore();
+          done();
         });
     });
   });
@@ -188,6 +265,20 @@ describe('PARTIES', () => {
           expect(res.body).to.be.an('object');
           expect(res.body.error).to.equal('party record not found');
           done(err);
+        });
+    });
+
+    it('should return server error for connection error to database', (done) => {
+      const stub = sinon.stub(pool, 'query').throws();
+
+      chai
+        .request(app)
+        .delete('/api/v1/parties/2')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(500);
+          stub.restore();
+          done();
         });
     });
   });

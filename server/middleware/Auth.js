@@ -10,33 +10,35 @@ const Authenticate = {
 */
   async verifyToken(req, res, next) {
     const authHeader = req.headers.authorization;
-    if (typeof authHeader === 'undefined') {
-      res.status(401).json({ error: 'Unathorized - Header not set' });
+    if (!authHeader) {
+      res.status(401).json({
+        status: 401,
+        error: 'Unauthorized - Header not set',
+      });
       return;
     }
     const token = authHeader.split(' ')[1];
     try {
       const decoded = await jwt.verify(token, process.env.SECRET);
-      if (!decoded.userId) {
-        res.status(400).json({
-          status: 400,
-          error: 'Token is Invalid',
-        });
-      }
       req.user = { id: decoded.userId };
       next();
     } catch (error) {
-      res.status(400).json({
-        status: 400,
-        error,
-      });
+      if (error.name === 'JsonWebTokenError') {
+        res.status(401).json({
+          status: 401,
+          message: 'Token provided can not be authenticated',
+        });
+      }
     }
   },
 
   async verifyAdmin(req, res, next) {
     const authHeader = req.headers.authorization;
-    if (typeof authHeader === 'undefined') {
-      res.status(401).json({ error: 'Unathorised - Header not set' });
+    if (!authHeader) {
+      res.status(401).json({
+        status: 401,
+        error: 'Unauthorised - Header not set',
+      });
       return;
     }
     const token = authHeader.split(' ')[1];
@@ -45,16 +47,19 @@ const Authenticate = {
       if (decoded.isAdmin === 'false') {
         res.status(403).json({
           status: 403,
-          error: 'You are not authorized',
+          error: 'You are not authorized. For Admins only',
         });
+        return;
       }
       req.user = { isadmin: decoded.isAdmin };
       next();
     } catch (error) {
-      res.status(400).json({
-        status: 400,
-        error,
-      });
+      if (error.name === 'JsonWebTokenError') {
+        res.status(401).json({
+          status: 401,
+          message: 'Token provided can not be authenticated',
+        });
+      }
     }
   },
 };
