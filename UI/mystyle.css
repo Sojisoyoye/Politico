@@ -49,7 +49,6 @@ html, body {
   }
   .overlay-text {
     color: rgb(246, 252, 255);
-<<<<<<< HEAD
     font-size: 1.5em;
   }
 
@@ -71,9 +70,6 @@ html, body {
       top: 72px;
       height: 50%;
     }
-=======
-    font-size: 35px;
->>>>>>> Fix landing page and create party form
   }
 
   @media (orientation: portrait) and (max-width: 414px), (orientation: landscape) and (max-height: 414px) {
@@ -118,11 +114,6 @@ html, body {
     font-size: 38px;
     margin-left: 30px;
   }
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> Fix landing page and create party form
   .intro {
     padding:0;
     margin:0 0 1.45rem;
