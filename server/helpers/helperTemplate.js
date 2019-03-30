@@ -246,8 +246,8 @@ class htmlHelperTemplate {
         padding: 10px;
         text-align: center;
         width: 250px;
-        background: red;
-        color: aliceblue;
+        background: #ff0000;
+        color: #fff;
         font-style: bold;
         overflow-wrap: break-word;
       }

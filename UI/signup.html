@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="mystyle.css">
-
-        <title>Politico | Sign Up</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <title>Politico | Sign Up</title>
 </head>
-
 <body>
-<div id="signup">
+<div>
     <div>
         <div class="app_signup_layout">
             <div class="app_signup_layout_content">
@@ -28,89 +25,64 @@
                     <div class="SignupTabContainer SignupTabContainer--basic">
                         <div class="SignupTabContainer__form">
                             <form method="post" id="sign_up_form" class="app_signup_signup_sheet_signup_form" enctype="multipart/form-data">
-
                                 <div class="app_signup_text_input_outer">
                                     <label>
-                                        <div class="app_signup_text_input_label_text">
+                                        <div class="app_signup_text_input_label">
                                             <span>First Name</span>
                                         </div>
                                         <input type="text" id="firstname" name="firstname" class="app_signup_text_input_input" required>
-                                        <div id="first_name_error" class="app_signup_text_input_error_message">
-
-                                        </div>
                                     </label>
                                 </div>
-
                                 <div class="app_signup_text_input_outer">
                                     <label>
-                                        <div class="app_signup_text_input_label_text">
+                                        <div class="app_signup_text_input_label">
                                             <span>Last Name</span>
                                         </div>
                                         <input type="text" id="lastname" name="lastname" class="app_signup_text_input_input" required>
-                                        <div id="last_name_error" class="app_signup_text_input_error_message">
-
-                                        </div>
                                     </label>
                                 </div>
-
                                 <div class="app_signup_text_input_outer">
                                     <label>
-                                        <div class="app_signup_text_input_label_text">
+                                        <div class="app_signup_text_input_label">
                                             <span>Other Name</span>
                                         </div>
                                         <input type="text" id="othername" name="othername" class="app_signup_text_input_input">
-                                        <div id="other_name_error" class="app_signup_text_input_error_message">
-
-                                        </div>
                                     </label>
                                 </div>
-
                                 <div class="app_signup_text_input_outer">
                                     <label>
-                                        <div class="app_signup_text_input_label_text">
+                                        <div class="app_signup_text_input_label">
                                             <span>Email</span>
                                         </div>
                                         <input type="email" id="email" name="email" class="app_signup_text_input_input" required>
-                                        <div id="email_error" class="app_signup_text_input_error_message">
-
-                                        </div>
                                     </label>
                                 </div>
-
                                 <div class="app_signup_text_input_outer">
                                     <label>
-                                        <div class="app_signup_text_input_label_text">
+                                        <div class="app_signup_text_input_label">
                                             <span>Password</span>
                                         </div>
                                         <input type="password" id="password" name="password" class="app_signup_text_input_input" required>
-                                        <div id="password_error" class="app_signup_text_input_error_message">
-
-                                        </div>
                                     </label>
                                 </div>
-
                                 <div class="app_signup_text_input_outer">
                                     <label>
-                                        <div class="app_signup_text_input_label_text">
+                                        <div class="app_signup_text_input_label">
                                             <span>Phone Number</span>
                                         </div>
                                         <input type="number" id="phonenumber" name="phonenumber" class="app_signup_text_input_input" required>
-                                        <div id="phone_number_error" class="app_signup_text_input_error_message">
-
-                                        </div>
                                     </label>
                                 </div>
-
                                 <div class="app_signup_text_input_outer">
                                     <label>
-                                        <div class="app_signup_text_input_label_text">
+                                        <div class="app_signup_text_input_label">
                                             <span>Passport Url</span>
                                         </div>
-                                        <input type="file" id="passport" name="passporturl" placeholder="passport..." class="app_signin_text_pol_input_input">
+                                        <input type="file" id="passport" name="passporturl" class="app_signin_text_input_input" required>
                                     </label>
                                 </div>
 
-                                    <div class="app_signup_consents">
+                                   <!-- <div class="app_signup_consents">
                                         <div class="app_signup_policy_message">
                                             <h2 class="app_signup_consents_heading">Terms of Use and Privacy Policy</h2>
                                             <div class="app_signup_consents_checkbox">
@@ -130,24 +102,22 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <button type="submit" id="sign_up_button">Sign Up</button>
+                                    <button type="submit" class="signup_signup_button" id="sign_up_button">Sign Up</button>
                                 </form>
-                            </div>
                         </div>
-                        
-                        <div class="app_signup_signup_sheet_signin">Already have an account?
+                        </div>
+                        <div class="app_signup_sheet_signin">Already have an account?
                             <a href="signin.html" class="app_signup_signup_sheet_signin_link">Sign In</a>
                         </div>
                     </div>
                 </div>
-                <div class="spacer">
-
-                </div>
                 <div class="copyright_footer">
                     <div class="copyright_footer--content">
-                        © Copyright 2019&nbsp;<a href="" class="footer-legal-link" target="_blank">Politico</a>. All Rights Reserved.&nbsp;<a href="/" class="footer-legal-link" target="_blank">Privacy Policy</a>&nbsp;•&nbsp;<a href="" class="footer-legal-link" target="_blank">Terms of Use</a>
+                        © Copyright 2019&nbsp;<a href="">Politico</a>. 
+                        All Rights Reserved.&nbsp;<a href="">
+                            Privacy Policy</a>&nbsp;•&nbsp;<a href="">Terms of Use</a>
                     </div>
                 </div>
             </div>
@@ -155,5 +125,5 @@
     </div>
 </div>
 </body>
-<script src="/UI/js/signup.js"></script>
+<script src="/UI/js/app.js"></script>
 </html>

@@ -181,7 +181,7 @@ describe('/GET political offices', () => {
       .end((err, res) => {
         expect(res.status).to.equal(500);
         stub.restore();
-        done();
+        done(err);
       });
   });
 
@@ -210,6 +210,49 @@ describe('/GET political offices', () => {
       });
   });
 
+  it('should post to get a specific political office', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/offices/1/')
+      .set('authorization', `Bearer ${userToken}`)
+      .send({ office: 1 })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body).to.be.an('object');
+        done(err);
+      });
+  });
+
+  it('should return error if post can not get a specific political party', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/offices/10/')
+      .set('authorization', `Bearer ${userToken}`)
+      .send({ office: 10 })
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.status).to.equal(404);
+        expect(res.body).to.be.an('object');
+        done(err);
+      });
+  });
+
+  it('should return server error for connection error to database to get an office', (done) => {
+    const stub = sinon.stub(pool, 'query').throws();
+
+    chai
+      .request(app)
+      .post('/api/v1/offices/1')
+      .set('authorization', `Bearer ${userToken}`)
+      .send({ office: 1 })
+      .end((err, res) => {
+        expect(res.status).to.equal(500);
+        stub.restore();
+        done(err);
+      });
+  });
+
   it('should return server error for connection error to database', (done) => {
     const stub = sinon.stub(pool, 'query').throws();
 
@@ -220,7 +263,7 @@ describe('/GET political offices', () => {
       .end((err, res) => {
         expect(res.status).to.equal(500);
         stub.restore();
-        done();
+        done(err);
       });
   });
 
@@ -277,7 +320,7 @@ describe('/GET political offices', () => {
       .end((err, res) => {
         expect(res.status).to.equal(500);
         stub.restore();
-        done();
+        done(err);
       });
   });
 });

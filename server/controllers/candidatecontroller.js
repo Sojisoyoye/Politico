@@ -24,8 +24,8 @@ const CandidateController = {
         data: rows,
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(500).json({
+        status: 500,
         error,
       });
     }
