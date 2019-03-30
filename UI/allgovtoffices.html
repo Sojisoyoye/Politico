@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="mystyle.css">
-
   <title>Politico | Government offices</title>
 </head>
-
 <body>  
   <div class="header">
-          <a class="header__link" href="index.html">
-              <h1 class="header__logo">Politico</h1> 
-          </a>
-          <section class="menu__section">
-              <ul class="menu">
-                  <li><a id="sign_out_button" class="menu__item menu__item--selected" href="index.html">Sign out</a></li>
-              </ul>
-          </section>
+    <a class="header__link" href="index.html">
+      <h1 class="header__logo">Politico</h1> 
+    </a>
+    <section class="menu__section">
+      <ul class="menu">
+        <li><a id="sign_out_button" class="menu__item menu__item--selected" href="index.html">Sign out</a></li>
+      </ul>
+    </section>
   </div>
-  
   <main id="site-main" class="row">
     <aside class="aside">
       <nav class="aside__nav">
@@ -29,20 +25,16 @@
           <li><a href="allpoliticalparty.html">All Political Parties</a></li>
           <li><a class="selected" href="allgovtoffices.html">Government Offices</a></li>
           <li><a href="">Edit Profile</a></li>
-          <!--<li><a href="registertorun.html">Register to Run</a></li>-->
         </ul>
       </nav>
     </aside>
-    
     <section class="main">
       <section class="political">
         <div class="political__meta">
           <h3 class="header1">Government Offices</h3>
           <p>Search for an office name in the field below</p>
-
           <div class="sort">
             <form>
-
               <fieldset>
                 <legend>Filter Rows</legend>
                 <select class="filter-record">
@@ -51,25 +43,21 @@
                   <option value="">100 Records</option>
                 </select>
               </fieldset>
-
             </form>
-
             <form id="office_search_form">
               <fieldset>
                       <legend>Search for an Office</legend>
                       <select name="" class= "search-input" id="search_input">
 
-                        </select>
-                      <!--<input class= "search-input" type="text" placeholder="Enter party ID">-->
+                      </select>
                       <button>Search</button> 
               </fieldset>
             </form>
             </div>
-        
-        <div>
-          <h3 class="header1">List of Government Offices</h3>
-        </div>
-        </div>
+            <div>
+              <h3 class="header1">List of Government Offices</h3>
+            </div>
+          </div>
           <div class="table-wrapper no-flow">
             <table class="political__table">
               <thead>
@@ -80,11 +68,10 @@
                   <th>Result</th>
                 </tr>
               </thead>
-              <tbody id="office_user_table_body" >
+              <tbody id="office_user_table_body">
               </tbody>
             </table>
           </div>
-          
           <section class="pagination">
             <button class="pagination__prev">⬅ Previous Page</button>
             <button class="pagination__next">Next Page ➡</button>
@@ -94,10 +81,10 @@
     </main>
     <div class="copyright_footer">
       <div class="copyright_footer--content">
-          © Copyright 2019&nbsp;<a href="" class="footer-legal-link">Politico</a>. All Rights Reserved.&nbsp;<a href="" class="footer-legal-link">Privacy Policy</a>&nbsp;•&nbsp;<a href="" class="footer-legal-link">Terms of Use</a>
+          © Copyright 2019&nbsp;<a href="">Politico</a>. 
+          All Rights Reserved.&nbsp;<a href="">Privacy Policy</a>&nbsp;•&nbsp;<a href="">Terms of Use</a>
       </div>
     </div>     
 </body>
-<!--<script src="/UI/js/alloffices.js"></script>-->
-<script src="/UI/js/app.js"></script>
+<script src="./js/app.js"></script>
 </html>

@@ -4,22 +4,19 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="mystyle.css">
-
     <title>Politico | Create Party</title>
 </head>
-
 <body>
     <div class="header">
-            <a class="header__link" href="index.html">
-                <h1 class="header__logo">Politico</h1> 
-            </a>
-            <section class="menu__section">
-                <ul class="menu">
-                    <li><a id="sign_out_button" class="menu__item menu__item--selected" href="index.html">Sign out</a></li>
-                </ul>
-            </section>
+        <a class="header__link" href="index.html">
+            <h1 class="header__logo">Politico</h1>
+        </a>
+        <section class="menu__section">
+            <ul class="menu">
+                <li><a id="sign_out_button" class="menu__item menu__item--selected" href="index.html">Sign out</a></li>
+            </ul>
+        </section>
     </div>
-
     <main id="site-main" class="row">
         <aside class="aside">
             <nav class="aside__nav">
@@ -40,30 +37,29 @@
                     <div class="SigninTabContainer__form">
                         <form method="post" id="create_party_form" class="app_signup_signup_sheet_signup_form" enctype="multipart/form-data">
                             <div class="app_signup_text_input_outer">
-                                    <label>
-                                            <div class="app_signup_text_input_label_text">
-                                                <span>Party Name</span>
-                                            </div>
-                                            <input type="text" id="name" name="name" class="app_signup_text_input_input" required>
-                                        </label>
+                                <label>
+                                    <div class="app_signup_text_input_label_text">
+                                        <span>Party Name</span>
+                                    </div>
+                                    <input type="text" id="name" name="name" class="app_signup_text_input_input" required>
+                                </label>
                             </div>            
                             <div class="app_signup_text_input_outer">
-                                    <label>
-                                            <div class="app_signup_text_input_label_text">
-                                                <span>Party Address</span>
-                                            </div>
-                                            <input type="text" id="hqAddress" name="hqAddress" class="app_signup_text_input_input" required>
-                                        </label>
+                                <label>
+                                    <div class="app_signup_text_input_label_text">
+                                        <span>Party Address</span>
+                                    </div>
+                                    <input type="text" id="hqAddress" name="hqAddress" class="app_signup_text_input_input" required>
+                                </label>
                             </div>
                             <div class="app_signup_text_input_outer">
-                                    <label for="partyacroymn">
-                                            <div class="app_signup_text_input_label_text">
-                                                <span>Party Logo</span>
-                                            </div>
-                                            <input type="file" id="logo" name="logoUrl" class="app_signin_text_pol_input_input" required>
-                                            </label>
+                                <label for="partyacroymn">
+                                    <div class="app_signup_text_input_label_text">
+                                        <span>Party Logo</span>
+                                    </div>
+                                    <input type="file" id="logo" name="logoUrl" class="app_signin_text_pol_input_input" required>
+                                </label>
                             </div>
-
                             <button type="submit">Create Party</button>
                         </form>
                     </div>
@@ -73,11 +69,10 @@
     </section>
 </main>
 <div class="copyright_footer">
-        <div class="copyright_footer--content">
-            © Copyright 2019&nbsp;<a href="/" class="footer-legal-link">Politico</a>. All Rights Reserved.&nbsp;<a href="" class="footer-legal-link">Privacy Policy</a>&nbsp;•&nbsp;<a href="" class="footer-legal-link">Terms of Use</a>
-        </div>
-    </div> 
+    <div class="copyright_footer--content">
+        © Copyright 2019&nbsp;<a href="/" class="footer-legal-link">Politico</a>. All Rights Reserved.&nbsp;<a href="" class="footer-legal-link">Privacy Policy</a>&nbsp;•&nbsp;<a href="" class="footer-legal-link">Terms of Use</a>
+    </div>
+</div> 
 </body>
-<script src="/UI/js/app.js"></script>
-<!--<script src="/UI/js/createparty.js"></script>-->
+<script src="./js/app.js"></script>
 </html>
