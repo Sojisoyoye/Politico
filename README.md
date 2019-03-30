@@ -5,7 +5,7 @@
 
 
 A platform for both the politicians and citizens, which enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
-
+[![Coverage Status](https://coveralls.io/repos/github/Sojisoyoye/Politico/badge.svg?branch=develop)](https://coveralls.io/github/Sojisoyoye/Politico?branch=develop)
 
 # Application Features
 >- Users can sign up and log in.
