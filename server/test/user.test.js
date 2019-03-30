@@ -216,7 +216,7 @@ describe('USERS', () => {
         .field('lastname', 'bar')
         .field('othername', 'o')
         .field('email', 'foobar@email.com')
-        .field('password', '')
+        .field('password', '123456')
         .field('phonenumber', '')
         .attach('passporturl', file, 'Andela.jpg')
         .end((err, res) => {
@@ -235,12 +235,33 @@ describe('USERS', () => {
         .field('lastname', 'bar')
         .field('othername', 'o')
         .field('email', 'foobar@email.com')
-        .field('password', '')
+        .field('password', '123456')
         .field('phonenumber', '080abc')
         .attach('passporturl', file, 'Andela.jpg')
         .end((err, res) => {
           expect(res).to.have.status(422);
           expect(res.body.status).to.be.equal(422);
+          done(err);
+        });
+    });
+
+    it('should return server error for connection error to database to create a user', (done) => {
+      const stub = sinon.stub(pool, 'query').throws();
+
+      chai
+        .request(app)
+        .post('/api/v1/auth/signup')
+        .type('form')
+        .field('firstname', 'foo')
+        .field('lastname', 'bar')
+        .field('othername', 'o')
+        .field('email', 'foobar@email.com')
+        .field('password', '123456')
+        .field('phonenumber', '08045245262')
+        .attach('passporturl', file, 'Andela.jpg')
+        .end((err, res) => {
+          expect(res.status).to.equal(500);
+          stub.restore();
           done(err);
         });
     });
@@ -308,6 +329,20 @@ describe('USERS', () => {
           done(err);
         });
     });
+
+    it('should return server error for connection error to database when user want to login', (done) => {
+      const stub = sinon.stub(pool, 'query').throws();
+
+      chai
+        .request(app)
+        .post('/api/v1/auth/login')
+        .send({ email: 'user@email.com', password: '123456' })
+        .end((err, res) => {
+          expect(res.status).to.equal(500);
+          stub.restore();
+          done(err);
+        });
+    });
   });
 
   describe('/GET all users', () => {
@@ -347,6 +382,20 @@ describe('USERS', () => {
         });
     });
 
+    it('should return server error for connection error to database to get users', (done) => {
+      const stub = sinon.stub(pool, 'query').throws();
+
+      chai
+        .request(app)
+        .get('/api/v1/users/')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(500);
+          stub.restore();
+          done(err);
+        });
+    });
+
     it('should get a specific user', (done) => {
       chai
         .request(app)
@@ -360,7 +409,7 @@ describe('USERS', () => {
         });
     });
 
-    it('should return server error for connection error to database', (done) => {
+    it('should return server error for connection error to database to get a specific user', (done) => {
       const stub = sinon.stub(pool, 'query').throws();
 
       chai
@@ -370,7 +419,7 @@ describe('USERS', () => {
         .end((err, res) => {
           expect(res.status).to.equal(500);
           stub.restore();
-          done();
+          done(err);
         });
     });
 

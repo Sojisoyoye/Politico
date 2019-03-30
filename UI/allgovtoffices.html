@@ -15,7 +15,7 @@
           </a>
           <section class="menu__section">
               <ul class="menu">
-                  <li><a class="menu__item menu__item--selected" href="index.html">Sign out</a></li>
+                  <li><a id="sign_out_button" class="menu__item menu__item--selected" href="index.html">Sign out</a></li>
               </ul>
           </section>
   </div>
@@ -54,10 +54,13 @@
 
             </form>
 
-            <form id="sort__id">
+            <form id="office_search_form">
               <fieldset>
                       <legend>Search for an Office</legend>
-                      <input class= "search-input" type="text" placeholder="Enter party ID">
+                      <select name="" class= "search-input" id="search_input">
+
+                        </select>
+                      <!--<input class= "search-input" type="text" placeholder="Enter party ID">-->
                       <button>Search</button> 
               </fieldset>
             </form>
@@ -77,7 +80,7 @@
                   <th>Result</th>
                 </tr>
               </thead>
-              <tbody id="office_table_body" >
+              <tbody id="office_user_table_body" >
               </tbody>
             </table>
           </div>
@@ -95,5 +98,6 @@
       </div>
     </div>     
 </body>
-<script src="/UI/js/alloffices.js"></script>
+<!--<script src="/UI/js/alloffices.js"></script>-->
+<script src="/UI/js/app.js"></script>
 </html>

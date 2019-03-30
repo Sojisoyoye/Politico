@@ -41,6 +41,8 @@ router.get('/parties', Authenticate.verifyToken, PartyController.getParties);
 
 router.get('/parties/:id', Authenticate.verifyToken, PartyController.getAParty);
 
+router.post('/parties/:id', Authenticate.verifyToken, PartyController.getPostAParty);
+
 router.patch('/parties/:id', validations.validateNameUpdate, validations.validationHandler, Authenticate.verifyAdmin, PartyController.updateName);
 
 router.delete('/parties/:id', validations.validatePartyId, validations.validationHandler, Authenticate.verifyAdmin, PartyController.deleteParty);
@@ -52,6 +54,8 @@ router.post('/offices', validations.validateOffice, validations.validationHandle
 router.get('/offices', Authenticate.verifyToken, OfficeController.getOffices);
 
 router.get('/offices/:id', Authenticate.verifyToken, OfficeController.getAOffice);
+
+router.post('/offices/:id', Authenticate.verifyToken, OfficeController.getPostAOffice);
 
 // Sign up and log in
 

@@ -98,6 +98,33 @@ const OfficeController = {
     }
   },
 
+  async getPostAOffice(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const getOneQuery = 'SELECT * FROM offices WHERE id = $1';
+    const value = [id];
+
+    try {
+      const { rows } = await pool.query(getOneQuery, value);
+      if (rows[0]) {
+        res.status(200).json({
+          status: 200,
+          data: rows[0],
+        });
+      }
+      if (!rows[0]) {
+        res.status(404).json({
+          status: 404,
+          error: 'office record not found',
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        status: 500,
+        error,
+      });
+    }
+  },
+
   /**
    * @method registerUser
    * @description registers a user running for an office

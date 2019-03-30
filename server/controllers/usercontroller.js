@@ -31,6 +31,7 @@ const UserController = {
       const token = Helper.genrateToken(rows[0].id, rows[0].isadmin);
       return res.status(201).json({
         status: 201,
+        message: 'Sign up successful',
         data: [{
           token,
           user: rows,
@@ -43,8 +44,8 @@ const UserController = {
           message: 'User with this email already exist',
         });
       }
-      return res.status(400).json({
-        status: 400,
+      return res.status(500).json({
+        status: 500,
         error,
       });
     }
@@ -91,8 +92,8 @@ const UserController = {
         }],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(500).json({
+        status: 500,
         error,
       });
     }
@@ -114,8 +115,8 @@ const UserController = {
         data: rows,
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(500).json({
+        status: 500,
         error,
       });
     }

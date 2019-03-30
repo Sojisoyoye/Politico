@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-// import sinon from 'sinon';
-// import pool from '../models/connect';
+import sinon from 'sinon';
+import pool from '../models/connect';
 import VoteController from '../controllers/votecontroller';
 import app from '../app';
 
@@ -191,6 +191,26 @@ describe('VOTES', () => {
           expect(res).to.have.status(403);
           expect(res.body.status).to.equal(403);
           expect(res.body.message).to.equal('you have already voted for this office');
+          done(err);
+        });
+    });
+
+    it('should return server connection error to database if can not get candidates', (done) => {
+      const stub = sinon.stub(pool, 'query').throws();
+
+      chai
+        .request(app)
+        .post('/api/v1/votes')
+        .set('authorization', `Bearer ${userToken}`)
+        .send({
+          office: 1,
+          candidate: 1,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(500);
+          expect(res.body.status).to.equal(500);
+          expect(res.body.message).to.equal('Server Error');
+          stub.restore();
           done(err);
         });
     });
