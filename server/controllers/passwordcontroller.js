@@ -17,13 +17,12 @@ const passwordController = {
     try {
       const { email } = req.body;
       const token = Helper.genrateToken(email);
-      const url = `http://localhost:3000/api/v1/password/reset/${token}`;
+      const url = `${req.protocol}://${req.get('host')}/password/reset/${token}`;
       const message = helperTemplate.confirmRequestPage(url);
       const subject = 'Reset Password';
       info = await sendMail({ to: email, subject, html: message });
       const { accepted } = info;
       if (accepted[0] === email) {
-        // console.log(token);
         res.status(200).json({
           status: 200,
           message: 'Kindly check your email for further instruction to reset your password',
