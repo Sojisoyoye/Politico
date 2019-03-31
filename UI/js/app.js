@@ -151,7 +151,7 @@ const postPasswordData = async (event) => {
   event.preventDefault();
 
   const email = document.getElementById('email').value;
-  const url = 'http://localhost:3000/api/v1/auth/reset';
+  const url = 'https://app-politico.herokuapp.com/api/v1/auth/reset';
   const resetData = { email };
 
   const resp = await reqProcess(url, 'POST', resetData);
@@ -203,7 +203,7 @@ const searchParty = async (event) => {
 
   const partyId = document.querySelector('#search_input').value;
 
-  const searchUrl = `http://localhost:3000/api/v1/parties/${partyId}`;
+  const searchUrl = `https://app-politico.herokuapp.com/api/v1/parties/${partyId}`;
   const searchBody = { party: partyId };
 
   const resp = await reqProcess(searchUrl, 'POST', searchBody);
@@ -330,7 +330,7 @@ const searchOffice = async (event) => {
 
   const officeId = document.querySelector('#search_input').value;
 
-  const searchUrl = `http://localhost:3000/api/v1/offices/${officeId}`;
+  const searchUrl = `https://app-politico.herokuapp.com/api/v1/offices/${officeId}`;
   const searchBody = { party: officeId };
 
   const resp = await reqProcess(searchUrl, 'POST', searchBody);
