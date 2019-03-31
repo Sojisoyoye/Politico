@@ -1,0 +1,883 @@
+swagger: "2.0"
+info: 
+  description: "A platform for both the politicians and citizens, which enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency."
+  title: Politico
+  version: "1.0"
+
+schemes:
+    - https
+host: app-politico.herokuapp.com
+basePath: '/api/v1'
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+tags:
+  - name: 'Authentication'
+
+  - name: 'Party'
+
+  - name: 'Office'
+
+  - name: 'Vote'
+
+paths:
+  /auth/signup:
+    post:
+      summary: 'An endpoint that handles the creation of a new user account'
+      description: 'This endpoint creates a new user account to use the application'
+      tags:
+        - Authentication
+      produces:
+        - application/json
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: 'Request body object containing users signup information'
+          schema:
+            $ref: '#/definition/UserSignuprequest'
+      responses:
+        201:
+          description: User sign up successful
+          example:
+            status: success
+            message: Sign up successful
+            data:
+              id: 1
+              firstname: Foo
+              lastname: Bar
+              othername: Doe
+              email: foobar@email.com
+              password: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvbHVlc3Rl
+              phonenumber: 1234567890
+              passporturl: http://res.cloudinary.com/dkporys8h/image/upload/v1554012973/politicoImgs/mlgvalfjolttindzvtlt.png
+              isAdmin: false
+        406:
+          description: User with email already esxist
+          example:
+            message: User with this email already exist
+            status: failure
+        422:
+          description: Provided inputs not supported
+          example:
+            error:
+              - Please provide a firstname
+              - please provide a valid firstname
+              - Firstname must be more than two characters
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+  /auth/login:
+    post:
+      summary: 'The endpoint authenticates the user to access the app.'
+      description: 'This endpoint authenticates the user by generating a jwt token to access the app'
+      tags:
+        - Authentication
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: Request body object containing users login information
+          schema:
+            $ref: '#/definitions/UserLoginrequest'
+      responses:
+        200:
+          description: User log in successful
+          example:
+            status: success,
+            message: Login successful,
+            data:
+              token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvbHVlc3RlZW1AZ21haWwuY2
+              user: id
+        404:
+          description: User with this details can not be found
+          example:
+            message: Email address incorrect
+            status: failure
+        401:
+          description: User with incorrect password
+          example:
+            message: Wrong password, try again
+            status: failure
+        422:
+          description: User entered incorrect input format
+          example:
+            error:
+              - Please enter an email
+              - Please provide a valid email
+        500:
+          decsription: Internal server error
+          example:
+            message: server error
+            status: failure
+
+  /auth/reset:
+    post:
+      summary: 'The endpoint authenticates the user to reset password.'
+      description: 'This endpoint authenticates the user by generating a jwt token to reset password for the app'
+      tags:
+        - Authentication
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: Request body object containing users password reset information
+          schema:
+            $ref: '#/definitions/UserPasswordRequest'
+      responses:
+        200:
+          description: Password reset successful
+          example:
+            status: success
+            message: Kindly check your email for further instruction to reset your password
+            data:
+              token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvbHVlc3RlZW1AZ2
+              user: id
+        404:
+          description: User with this email can not be found
+          example:
+            message: Email address incorrect
+            status: failure
+        422:
+          description: User entered incorrect input format
+          example:
+            error:
+              - Please enter an email
+              - Please provide a valid email
+        500:
+          decsription: Internal server error
+          example:
+            message: server error
+            status: failure
+
+  /parties/:
+    get:
+      summary: Gets available political parties
+      description: This endoint gets all political parties available
+      tags:
+        - Party
+      produces:
+        - application/json,
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: Political parties retreived successfully
+          example:
+            status: success
+            message: Parties retreived suceessfully
+            data:
+              - id: 1
+                name: New Nigeria Party
+                hqaddress: 1, Aso rock, Abuja
+                logourl: http://res.cloudinary.com/dkporys8h/image/upload/v1554012973/politicoImgs/klgvalfjolttindzvtlt.png
+              - id: 2
+                name: New State Party
+                hqaddress: 2,Aso rock, Abuja
+                logourl: http://res.cloudinary.com/dkporys8h/image/upload/v1554012973/politicoImgs/klgvalfjolttindzvtlt.png
+        401:
+          description: Authentication Error
+          example:
+            message: Token provided can not be authenticated
+            status: failure
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+    post:
+      summary: Creates a new political party
+      description: This endpoint creates a new political party
+      tags:
+        - Party
+      produces:
+        - application/json
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: Body object representing the new party details.
+          schema:
+            $ref: '#/definitions/CreatePartyRequest'
+      responses:
+        201:
+          description: Party created successfully
+          example:
+            status: success
+            message: Party created successfully
+            data:
+              id: 1
+              name: New Nigeria Party
+              hqaddress: 1, Aso rock, Abuja
+              logourl: http://res.cloudinary.com/dkporys8h/image/upload/v1554012973/politicoImgs/klgvalfjolttindzvtlt.png
+        400:
+          description: Bad request
+          example:
+            message: The party name already exist
+            status: failure
+        401:
+          description: Authentication Error
+          example:
+            message: Unauthorized - Token/Header error
+            status: failure
+        403:
+          description: 'Access denied user can not create a party'
+          example:
+            message: You are not authorized For Admins only
+            status: failure
+        422:
+          description: Unsupported input format
+          example:
+            error:
+              - please provide a party name
+              - please enter a valid name
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+  /parties/{id}:
+    get:
+      summary: fetches a political party
+      description: This endpoint gets a single political party
+      tags:
+        - Party
+      produces:
+        - application/json
+      security:
+        - Bearer []
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: Unique party id
+      responses:
+        200:
+          description: Party retrieved successfully
+          example:
+            status: success,
+            message: Party retrieved successfully
+            data:
+              id: 1
+              name: New Nigeria Party
+        401:
+          description: 'Authentication Error'
+          example:
+            message: Unauthorized - Token/Header error
+            status: failure
+        404:
+          description: Party not found
+          example:
+            message: Party not found
+            status: failure
+        422:
+          description: Unsupported input format
+          example:
+            error:
+              - Party id must be integer from 1 upwards
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+    delete:
+      summary: Deletes a political party
+      description: This endpoint deletes a political party
+      tags:
+        - Party
+      produces:
+        - application/json
+      security:
+        - Bearer []
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: Unique party id
+      responses:
+        200:
+          description: Party retrieved successfully
+          example:
+            status: success,
+            message: Party retrieved successfully
+            data: Party retrieved successfully
+        401:
+          description: 'Authentication Error'
+          example:
+            message: Unauthorized - Token/Header error
+            status: failure
+        403:
+          description: 'Access denied - user can not create a party'
+          example:
+            message: You are not authorized. For Admins only
+            status: failure
+        404:
+          description: Party not found
+          example:
+            message: Party not found
+            status: failure
+        422:
+          description: Unsupported input format
+          example:
+            error:
+              - Party id must be integer from 1 upwards
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+  /parties/{id}/name:
+    patch:
+      summary: Updates the name of a political party
+      description: This endpoint updates a political party
+      tags:
+        - Party
+      produces:
+        - application/json
+      security:
+        - Bearer []
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: Unique party id
+        - in: body
+          name: body
+          required: true
+          description: Body object representing the partys update information
+          schema:
+            $ref: '#/definitions/UpdatePartyRequest'
+      responses:
+        200:
+          description: Party updated successfully
+          example:
+            status: success,
+            message: Party updated successfully
+            data:
+              id: 1
+              name: New People Nigeria Party
+        400:
+          description: Bad request
+          example:
+            message: The party name already exist
+            status: failure
+        401:
+          description: 'Authentication Error'
+          example:
+            message: Unauthorized - Token/Header error
+            status: failure
+        403:
+          description: 'Access denied - user can not create a party'
+          example:
+            message: You are not authorized. For Admins only
+            status: failure
+        404:
+          description: Party not found
+          example:
+            message: Party not found
+            status: failure
+        422:
+          description: Unsupported input format
+          example:
+            error:
+              - please provide a party name
+              - please enter a valid name
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+  /offices/:
+    get:
+      summary: Gets available government offices
+      description: This endpoint gets all government offices available
+      tags:
+        - Office
+      produces:
+        - application/json
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: Offices retreived successfully
+          example:
+            status: success
+            message: offices retreived suceessfully
+            data:
+              - id: 1,
+                name: President
+                type: Federal
+              - id: 2
+                name: Governor, Lagos State
+                hqaddress: State
+        401:
+          description: Authentication Error
+          example:
+            message: Token provided can not be authenticated
+            status: failure
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+    post:
+      summary: Creates a new government office
+      description: This endpoint creates a new government office
+      tags:
+        - Office
+      produces:
+        - application/json
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: Body object representing the new government office details.
+          schema:
+            $ref: '#/definitions/CreateOfficeRequest'
+      responses:
+        201:
+          description: Office created successfully
+          example:
+            status: success
+            message: Office created successfully
+            data:
+              id: 1
+              name: President
+              type: Federal
+        400:
+          description: Bad request
+          example:
+            message: The office name already exist
+            status: failure
+        401:
+          description: 'Authentication Error'
+          example:
+            message: Unauthorized Token/Header error
+            status: failure
+        403:
+          description: 'Access denied - user can not create an office'
+          example:
+            message: You are not authorized. For Admins only
+            status: failure
+        422:
+          description: Unsupported input format
+          example:
+            error:
+              - please provide an office name
+              - please enter a valid office name
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+  /offices/{id}:
+    get:
+      summary: fetches a government office
+      description: This endpoint gets a single government office
+      tags:
+        - Office
+      produces:
+        - application/json
+      security:
+        - Bearer []
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: Unique office id
+      responses:
+        200:
+          description: Office retrieved successfully
+          example:
+            status: success,
+            message: Office retrieved successfully
+            data:
+              id: 1
+              name: President
+        401:
+          description: 'Authentication Error'
+          example:
+            message: Unauthorized - Token/Header error
+            status: failure
+        404:
+          description: Office not found
+          example:
+            message: Office not found
+            status: failure
+        422:
+          description: Unsupported input format
+          example:
+            error:
+              - Office id must be integer from 1 upwards
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+    /office/{userId}/register:
+      post:
+        summary: Registers a user as a candidate to run for a government office
+        description: This endpoint registers a user as a candidate to run for a government office
+      tags:
+        - Office
+      produces:
+        - application/json
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: Unique user id
+        - in: body
+          name: body
+          required: true
+          description: Body object representing the new candidate details.
+          schema:
+            $ref: '#/definitions/RegisterCandidateRequest'
+      responses:
+        201:
+          description: User registered successfully
+          example:
+            status: success
+          message: User registered successfully
+            data:
+              office: 1
+              party: 1
+              candidate: 1
+        400:
+          description: Bad request
+          example:
+            message: The user already registered to run for an office
+            status: failure
+        401:
+          description: 'Authentication Error'
+          example:
+            message: Unauthorized - Token/Header error
+            status: failure
+        403:
+          description: 'Access denied user can not register a candidate'
+          example:
+            message: You are not authorized. For Admins only
+            status: failure
+        422:
+          description: Unsupported input format
+          example:
+            error:
+              - Please provide an office id
+              - Office id must be integer from 1 upwards
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+  /office/{officeId}/result:
+    post:
+      summary: Retrieves the result of a government office
+      description: This endpoint retrieves the result of a government office
+      tags:
+        - Office
+      produces:
+        - application/json
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: Unique office id
+        - in: body
+          name: body
+          required: true
+          description: Body object representing the office details.
+          schema:
+            $ref: '#/definitions/OfficeResultRequest'
+      responses:
+        201:
+          description: Result retrieved successfully
+          example:
+            status: success
+            message: Result retrieved successfully
+            data:
+              office: 1
+              candidate: 1
+              result: 10
+        401:
+          description: 'Authentication Error'
+          example:
+            message: Unauthorized - Token/Header error
+            status: failure
+        422:
+          description: Unsupported input format
+          example:
+            error:
+              - Please provide an office id
+              - Office id must be integer from 1 upwards
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+  /vote:
+    post:
+      summary: Allows user vote for a candidate per office
+      description: This endpoint allows user vote for a candidate per office
+      tags:
+        - Vote
+      produces:
+        - application/json
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: Body object representing the vote details.
+          schema:
+            $ref: '#/definitions/VoteRequest'
+      responses:
+        201:
+          description: You have voted successfully
+          example:
+            status: success
+            message: You have voted successfully
+            data:
+              created by: 1
+              office: 1
+              candidate: 1
+        401:
+          description: 'Authentication Error'
+          example:
+            message: Unauthorized - Token/Header error
+            status: failure
+        403:
+          description: You have already voted for this office
+          example:
+            message: You have already voted for this office
+            status: failure
+        404:
+          description: Office not found
+          example:
+            message: Office not found
+            status: failure
+        404:
+          description: Candidate not found
+          example:
+            message: Candidate not found
+            status: failure
+        422:
+          description: Unsupported input format
+          example:
+            error:
+              - Please provide an office id
+              - Office id must be integer from 1 upwards
+        500:
+          description: Internal server error
+          example:
+            message: Server error
+            status: failure
+
+definitions:
+  UserSignuprequest:
+    title: 'User Sign Up Request'
+    type: object
+    properties:
+      firstname:
+        description: 'The firstname of the user'
+        type: string
+      lastname:
+        description: 'The lastname of the user'
+        type: string
+      othername:
+        description: 'The othername of the user'
+        type: string
+      email:
+        description: 'The email address of the user'
+        type: string
+      password:
+        description: 'The password of the user'
+        type: string
+      phonenumber:
+        description: 'The phone number of the user'
+        type: integer
+      passporturl:
+        description: 'The image url of the user'
+        type: string
+    example:
+      firstname: Foo
+      lastname: Bar
+      othername: Doe
+      email: foobar@email.com
+      password: 12345678
+      phonenumber: 1234567890
+      passporturl: http://res.cloudinary.com/dkporys8h/image/upload/v1554012973/politicoImgs/mlgvalfjolttindzvtlt.png
+    required:
+      - firstname, lastname, email, password, phonenumber, passporturl
+
+  UserLoginrequest:
+    title: 'User Login Request'
+    type: object
+    properties:
+      email:
+        description: 'The email address of the user'
+        type: string
+      password:
+        description: 'The password of the user'
+        type: string
+    example:
+        email: foobar@email.com
+        password: 12345678
+    required:
+       - email, password
+
+  UserPasswordRequest:
+    title: 'User Password Request'
+    type: object
+    properties:
+      email:
+        description: 'The email address of the user'
+        type: string
+    example:
+        email: foobar@email.com
+    required:
+       - email
+
+  CreatePartyRequest:
+    title: 'Party Create Request'
+    type: object
+    properties:
+      name:
+        description: 'The name of the party'
+        type: string
+      hqaddress:
+        description: 'The address of the party'
+        type: string
+      logoUrl:
+        description: 'The party logo image url'
+        type: string
+    example:
+      name: New Nigeria party
+      hqaddress: 1, Aso Roack, Abuja
+      logoUrl: http://res.cloudinary.com/dkporys8h/image/upload/v1554012973/politicoImgs/mlgvalfjolttindzvtlt.png
+    required:
+      - name
+      - hqaddress
+      - logoUrl
+
+  UpdatePartyRequest:
+    title: 'Party Update Request'
+    type: object
+    properties:
+      name:
+        description: 'The name of the party'
+        type: string
+    example:
+      name: New Nigeria Peoples Party
+    required:
+      - name
+
+  CreateOfficeRequest:
+    title: 'Office Create Request'
+    type: object
+    properties:
+      name:
+        description: 'The name of the office'
+        type: string
+      type:
+        description: 'The type of the office'
+        type: string
+    example:
+      name: President
+      type: Federal
+    required:
+      - name
+      - type
+
+  RegisterCandidateRequest:
+    title: 'Candidate Register Request'
+    type: object
+    properties:
+      office:
+        description: 'The office id of the office'
+        type: integer
+      party:
+        description: 'The party id of the candidate '
+        type: integer
+      candidate:
+        description: 'The user id of the candidate'
+        type: integer
+    example:
+      office: 1
+      party: 1
+      candidate: 1
+    required:
+      - office
+      - party
+      - candidate
+
+  OfficeResultRequest:
+    title: 'Office Result Request'
+    type: object
+    properties:
+      office:
+        description: 'The id of the office'
+        type: integer
+    example:
+      office: 1
+    required:
+      - office
+
+  VoteRequest:
+    title: 'Vote Request'
+    type: object
+    properties:
+      created by:
+        description: 'The id of the voting user'
+        type: integer
+      office:
+        description: 'The office id of the office'
+        type: integer
+      candidate:
+        description: 'The user id of the candidate'
+        type: integer
+    example:
+      office: 1
+      party: 1
+      candidate: 1
+    required:
+      - created by
+      - office
+      - candidate
