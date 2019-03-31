@@ -17,7 +17,7 @@ const passwordController = {
     try {
       const { email } = req.body;
       const token = Helper.genrateToken(email);
-      const url = `${req.protocol}://${req.get('host')}/password/reset/${token}`;
+      const url = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${token}`;
       const message = helperTemplate.confirmRequestPage(url);
       const subject = 'Reset Password';
       info = await sendMail({ to: email, subject, html: message });
