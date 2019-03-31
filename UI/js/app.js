@@ -702,24 +702,24 @@ if (signoutButton) {
   });
 }
 
-if (window.location.pathname === '/allpoliticalparty.html') {
+if (window.location.pathname === '/UI/allpoliticalparty.html') {
   getUserPartyTable();
   getParties();
 }
-if (window.location.pathname === '/allgovtoffices.html') {
+if (window.location.pathname === '/UI/allgovtoffices.html') {
   getUserOfficeTable();
   getOffices();
 }
-if (window.location.pathname === '/vote.html') {
+if (window.location.pathname === '/UI/vote.html') {
   getVoteOffice();
   getVoteCandidate();
 }
-if (window.location.pathname === '/politicalparty.html') {
+if (window.location.pathname === '/UI/politicalparty.html') {
   getPartyTable();
 }
-if (window.location.pathname === '/govtoffice.html') {
+if (window.location.pathname === '/UI/govtoffice.html') {
   getOfficeTable();
 }
-if (window.location.pathname === '/users.html') {
+if (window.location.pathname === '/UI/users.html') {
   getUserTable();
 }
